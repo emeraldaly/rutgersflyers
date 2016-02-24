@@ -51,7 +51,8 @@ password:
 *
 *
 
-## Project Management Aproach: Daily check-in & Creating github issues 
+## Project Management Aproach: 
+* Daily check-in & Creating github issues 
 
 
 
