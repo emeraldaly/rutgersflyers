@@ -38,6 +38,10 @@ app.engine('handlebars', expressHandlebars({
 
 app.set('view engine', 'handlebars');
 
+var routes = require('./controllers/rutgersController.js');
+app.use('/', routes);
+
+
 // database connection via sequelize
 connection.sync().then(function() {
   app.listen(PORT, function() {
