@@ -1,14 +1,14 @@
 //express setup
 var express = require('express');
-var app = express ();
-var PORT = process.env.PORT || 8080;
+var app = express();
+var PORT = process.env.NODE_ENV || 8080;
 
 var expressHandlebars = require('express-handlebars');
 
 //database setup
 //update name of database!
 var Sequelize = require('sequelize');
-var connection = new Sequelize('name_db', 'root');
+var connection = new Sequelize('rutgersflyers_db', 'root');
 
 //passport
 var passport = require('passport');
@@ -19,7 +19,6 @@ var bcrypt = require("bcryptjs");
 
 //bodyParser
 var bodyParser = require('body-parser');
-
 
 //middleware
 app.use(require('express-session')({
