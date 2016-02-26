@@ -19,7 +19,7 @@ var bcrypt = require("bcryptjs");
 
 //bodyParser
 var bodyParser = require('body-parser');
-
+app.use(express.static('public'));
 //middleware
 app.use(require('express-session')({
   secret: "rutgerpridesecrets",
