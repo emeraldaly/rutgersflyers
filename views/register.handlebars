@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title> Register</title>
+	</head>
+	<body>
+		<div class="container containernavpadding">
+			<div class="row">
+				<div class="col-md-8">
+					<h3>Register for Rutgers Flyers</h3>
+          <h4> {{msg}}</h4>
+				</div>
+			</div>
+      <div class="col-md-2"></div>
+
+				<div class="col-md-4">
+					<form role="form" method="post" action="/register">
+						<div class="form-group">
+							<label for="firstname">First Name:</label>
+							<input type="text" class="input-sm form-control" name="fname">
+						</div>
+						<div class="form-group">
+							<label for="lastname">Last Name:</label>   
+							<input type="text" class="input-sm form-control" name="lname">
+						</div>
+						<div class="form-group">
+							<label for="firstname">Email:</label>
+							<input class="input-sm form-control" name="email">
+						</div>
+						<div class="form-group">
+							<label for="Password">Password:</label>
+							<input type="password" class="input-sm form-control"
+              name="password">
+						</div>
+						<div class="buttonpad">
+							<button type="submit" class="btn btn-default">Submit</button>
+						</div>
+					</form>
+				</div> <!-- close col -->
+
