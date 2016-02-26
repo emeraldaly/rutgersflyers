@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get("/", function(req, res) {
  
-  res.send("this is the home page!")
+  res.render("home")
 })
 
 
