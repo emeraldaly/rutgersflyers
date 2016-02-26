@@ -11,3 +11,16 @@ font-family: "Raleway";
 .dropdown-menu {
 padding:10px;
 }
+
+.navbar{
+  font-size: 1.1em;
+}
+.brand1{
+font-size: 120%;
+width: 100%;
+left: 0;
+position: absolute;
+text-align: center;
+margin: auto;
+}
+
