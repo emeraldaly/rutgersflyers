@@ -68,8 +68,8 @@ connection.sync();
 
 
 
-User.bulkCreate([
-	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
-]);
+//User.bulkCreate([
+//	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
+//]);
 
 
