@@ -59,6 +59,7 @@ router.post("/register", function(req, res){
       res.redirect("/login?msg=Your email is already registered. Please login");}
     else {
       models.UserX.create({
+        username: req.body.username,
         lname: req.body.lname,
         fname: req.body.fname,
         email: req.body.email,
