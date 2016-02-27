@@ -4,7 +4,8 @@
   "description": "A social app intended for incoming students that explores events/museums/restaurants/retail, etc. in and around Rutgers-New Brunswick.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
