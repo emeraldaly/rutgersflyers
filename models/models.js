@@ -3,8 +3,8 @@ var mysql = require('mysql');
 var Sequelize = require('sequelize');
 if(process.env.NODE_ENV === 'production') {
   // HEROKU DB
-  console.log(process.env.CLEARDB_DATABASE_URL);
-  var connection = new Sequelize(process.env.CLEARDB_DATABASE_URL);
+  console.log(process.env.JAWSDB__URL);
+  var connection = new Sequelize(process.env.JAWSDB__URL);
 } 
 else {
   // LOCAL DB
@@ -12,26 +12,26 @@ else {
 }
 
 
-//var User = connection.define ('User',{
- // username : {
-//    type : Sequelize.STRING,
-//    unique : true,
- //   allowNull: false
- // },
- //  password: {
-  //  type:Sequelize.STRING,
-  //  unique: true,
-  //  allowNull:false
- //  }, 
- // email: {
-  //  type: Sequelize.STRING,
-  //  allowNull: false,
- // },
- // lname: Sequelize.STRING,
-//  fname: Sequelize.STRING
-// });
+var User = connection.define ('User',{
+ username : {
+    type : Sequelize.STRING,
+    unique : true,
+    allowNull: false
+  },
+   password: {
+    type:Sequelize.STRING,
+    unique: true,
+    allowNull:false
+   }, 
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  lname: Sequelize.STRING,
+  fname: Sequelize.STRING
+ });
 
-//exports.UserX = User;
+exports.UserX = User;
 
 
  var Category = connection.define('Category', {

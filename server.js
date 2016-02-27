@@ -1,7 +1,8 @@
 //express setup
 var express = require('express');
 var app = express();
-var PORT = process.env.NODE_ENV || 9000;
+var PORT = process.env.PORT || 9000;
+
 var expressHandlebars = require('express-handlebars');
 //passport
 var passport = require('passport');
@@ -13,7 +14,7 @@ var bcrypt = require("bcryptjs");
 
 //bodyParser
 var bodyParser = require('body-parser');
-
+require('dotenv').config();
 //middleware
 app.use(express.static('public'));
 app.use(require('express-session')({
