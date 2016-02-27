@@ -1,10 +1,7 @@
 //database setup
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
-var connection = new Sequelize(
-'mysql://n5tkx0xeokxdtu87:gm5xdj7gvjwjab4t@l3855uft9zao23e2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ky27j3b15lysjawy'
-);
-
+var connection = new Sequelize('rutgersflyers_db', 'root');
 
 
 var User = connection.define ('User',{
@@ -66,8 +63,26 @@ connection.sync();
 
 //User.bulkCreate([
 //	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
+//    { lname: 'Svenson', fname: 'Richard', password: 'tester', username: 'Richardinhouse', email:'richardinhouse@gmail.com' },
+//    { lname: 'Varga', fname: 'Taylor', password: 'tester', username: 'cuttlefish01', email:'cuttlefish@gmail.com' },
+//    { lname: 'Wong', fname: 'Kaleigh', password: 'tester', username: 'kwong1', email:'kwong1@gmail.com' },
+//    { lname: 'Blackwell', fname: 'Hillary', password: 'tester', username: 'hblackwell', email:'hblackwell@gmail.com' },
+//    { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
 //]);
-//Venues
-//{}
+
+//Venues.bulkCreate([
+//{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
+//  { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
+// ]);
+
+// Categories.bulkCreate([
+//   { category: 'Food' },
+//   { category: 'Transportation' },
+//   { category: 'Services'},
+//   { category: 'Events' }
+
+//   ]);
+}
+
 
 
