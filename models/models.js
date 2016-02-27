@@ -9,7 +9,7 @@ if(process.env.NODE_ENV === 'production') {
 else {
   // LOCAL DB
   var connection = new Sequelize('rutgersflyers_db', 'root');
-}//var connection1 = mysql.createConnection(process.env.JAWSDB_URL);
+}
 
 
 var User = connection.define ('User',{
@@ -68,7 +68,7 @@ exports.ReviewX = Review;
 connection.sync();
 
 
-
+/*
 User.bulkCreate([
 	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
    { lname: 'Svenson', fname: 'Richard', password: 'tester', username: 'Richardinhouse', email:'richardinhouse@gmail.com' },
@@ -91,5 +91,5 @@ Category.bulkCreate([
 
   ]);
 
-
+*/
 
