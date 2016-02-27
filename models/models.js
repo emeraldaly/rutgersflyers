@@ -1,7 +1,8 @@
 //database setup
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
-var connection = new Sequelize(process.env.JAWSDB_URL);
+var connection = new Sequelize(process.env.mysql://n5tkx0xeokxdtu87:gm5xdj7gvjwjab4t@l3855uft9zao23e2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com);
+
 
 
 var User = connection.define ('User',{
