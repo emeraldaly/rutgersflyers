@@ -1,9 +1,16 @@
 //database setup
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
-var connection = new Sequelize(
-'rutgersflyers_db', 'root'
-);
+if(process.env.NODE_ENV === 'production') {
+  // HEROKU DB
+  console.log(process.env.JAWSDB_URL);
+  var connection = new Sequelize(process.env.JAWSDB_URL);
+} 
+else {
+  // LOCAL DB
+  var connection = new Sequelize('rutgersflyers_db', 'root');
+}//var connection1 = mysql.createConnection(process.env.JAWSDB_URL);
+
 
 var User = connection.define ('User',{
   username : {
