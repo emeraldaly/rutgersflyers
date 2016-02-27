@@ -44,6 +44,9 @@ function saltyhash(pass) {
 }
 
 //ROUTES
+//call yelp API
+var yelpApi = require('../api/yelpApi.js');
+
 //register get and post
 router.get('/register', function(req, res) {
   console.log(req.query.msg);
@@ -73,7 +76,8 @@ router.post("/register", function(req, res){
 });
 
 router.get("/", function(req, res) {
-  res.render("home")
+  res.render("home");
+  console.log(yelpFind);
 })
 
 //login get and post
