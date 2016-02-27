@@ -1,7 +1,7 @@
 //database setup
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
-var connection = new Sequelize('rutgersflyers_db', 'root');
+var connection = new Sequelize(JAWSDB_URL);
 
 
 var User = connection.define ('User',{
