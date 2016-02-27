@@ -1,7 +1,10 @@
 //database setup
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
-var connection = new Sequelize('rutgersflyers_db', 'root');
+var connection = new Sequelize(
+'mysql://n5tkx0xeokxdtu87:gm5xdj7gvjwjab4t@l3855uft9zao23e2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ky27j3b15lysjawy'
+);
+
 
 
 var User = connection.define ('User',{
