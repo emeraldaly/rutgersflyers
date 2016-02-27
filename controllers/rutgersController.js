@@ -4,7 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
 var models = require('../models/models.js');
-var yelp = require('yelp');
+var yelpyodel = require('yelp');
 
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
@@ -44,6 +44,9 @@ function saltyhash(pass) {
 }
 
 //ROUTES
+//call yelp API
+var yelpApi = require('../api/yelpApi.js');
+
 //register get and post
 router.get('/register', function(req, res) {
   console.log(req.query.msg);
@@ -71,9 +74,20 @@ router.post("/register", function(req, res){
     }
   })
 });
+router.get('/test', function(req, res){
+  yelpApi.yelpFind;
+
+//models.VenuesX.create({
+  //name: data.businesses[0].name,
+  //phoneNumber: data.businesses[0].display_phone,
+ // website: 'www' + data.businesses[0].name + '.com', 
+ // address: data.businesses[0].display_address[0]+data.businesses[0].display_address[1]
+//})
+});
 
 router.get("/", function(req, res) {
-  res.render("home")
+  res.render("home");
+  //console.log(yelpFind);
 })
 
 //login get and post
