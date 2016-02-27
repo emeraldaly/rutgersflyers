@@ -1,8 +1,7 @@
 //database setup
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
-var connection = new Sequelize('rutgersflyers_db, local'
-);
+var connection = new Sequelize('rutgersflyers_db, root');
 
 
 
