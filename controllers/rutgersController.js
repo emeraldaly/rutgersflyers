@@ -27,7 +27,9 @@ function yelpFunc() {
 });
 }
 
+
 yelpFunc();
+
 
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
@@ -109,7 +111,6 @@ var x = yelp.search({term: 'food', location: 'Philadelphia'});
 
 router.get("/", function(req, res) {
   res.render("home");
-  //console.log(yelpFind);
 })
 
 //login get and post
