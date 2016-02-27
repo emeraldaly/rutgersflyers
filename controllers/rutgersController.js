@@ -14,10 +14,11 @@ var yelp = new yelpyodel({
 });
  
 // See http://www.yelp.com/developers/documentation/v2/search_api 
-function yelpFunc(var1, var2) {
-  var1 = 'new brunswick';
-  
-  yelp.search({ term: var1, location: 'New Brunswick' })
+function yelpFunc() {
+ var  var1 = 'food';
+  var var2 = "new brunswick";
+
+  yelp.search({term:var1, location:var2})
 .then(function (data) {
   console.log(data);
 })
@@ -26,7 +27,7 @@ function yelpFunc(var1, var2) {
 });
 }
 
-fun();
+yelpFunc();
 
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
