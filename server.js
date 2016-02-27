@@ -41,6 +41,6 @@ var routes = require('./controllers/rutgersController.js');
 app.use('/', routes);
 
 //database connection
-  app.listen(PORT, function() {
+  app.listen(PORT, '127.0.0.1', function() {
       console.log("Listening on:" + PORT)
   });
