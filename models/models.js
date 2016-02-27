@@ -12,26 +12,26 @@ else {
 }
 
 
-var User = connection.define ('User',{
-  username : {
-    type : Sequelize.STRING,
-    unique : true,
-    allowNull: false
-  },
-   password: {
-    type:Sequelize.STRING,
-    unique: true,
-    allowNull:false
-   }, 
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  lname: Sequelize.STRING,
-  fname: Sequelize.STRING
- });
+//var User = connection.define ('User',{
+ // username : {
+//    type : Sequelize.STRING,
+//    unique : true,
+ //   allowNull: false
+ // },
+ //  password: {
+  //  type:Sequelize.STRING,
+  //  unique: true,
+  //  allowNull:false
+ //  }, 
+ // email: {
+  //  type: Sequelize.STRING,
+  //  allowNull: false,
+ // },
+ // lname: Sequelize.STRING,
+//  fname: Sequelize.STRING
+// });
 
-exports.UserX = User;
+//exports.UserX = User;
 
 
  var Category = connection.define('Category', {
