@@ -4,8 +4,23 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
 var models = require('../models/models.js');
-var yelp = require('yelp');
+var yelpyodel = require('yelp');
 
+var yelp = new yelpyodel({
+  consumer_key: 'YyYLFGh2r0HzFGhENX21YA',
+  consumer_secret: 'echqVZjby1_xDWMOwW1twwIE0is',
+  token: 'BpQbEeWyTT0vEiek3OI8OiZisCVvPucX',
+  token_secret: '7PYYhCqDr8awrETlGYWHEiCW__M'
+});
+ 
+// See http://www.yelp.com/developers/documentation/v2/search_api 
+yelp.search({ term: 'food', location: 'Montreal' })
+.then(function (data) {
+  console.log(data);
+})
+.catch(function (err) {
+  console.error(err);
+});
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
   passReqToCallback: true, 
@@ -43,7 +58,10 @@ function saltyhash(pass) {
   return hash;
 }
 
+
 //ROUTES
+//call yelp API
+
 //register get and post
 router.get('/register', function(req, res) {
   console.log(req.query.msg);
@@ -71,9 +89,19 @@ router.post("/register", function(req, res){
     }
   })
 });
+router.get('/test', function(req, res){
+var x = yelp.search({term: 'food', location: 'Philadelphia'});   
+//models.VenuesX.create({
+  //name: data.businesses[0].name,
+  //phoneNumber: data.businesses[0].display_phone,
+ // website: 'www' + data.businesses[0].name + '.com', 
+ // address: data.businesses[0].display_address[0]+data.businesses[0].display_address[1]
+//})
+});
 
 router.get("/", function(req, res) {
-  res.render("home")
+  res.render("home");
+  //console.log(yelpFind);
 })
 
 //login get and post
