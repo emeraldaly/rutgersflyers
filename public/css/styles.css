@@ -1,6 +1,11 @@
 .containernavpadding {
   padding-top: 80px;
 }
+img {
+  padding: 50px;
+}
+
+
 h3 {
   text-align: center;
 }
