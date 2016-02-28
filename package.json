@@ -5,10 +5,10 @@
     "node": "5.6.0"
   },
   "description": "A social app intended for incoming students that explores events/museums/restaurants/retail, etc. in and around Rutgers-New Brunswick.",
-  "main": "server1.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server1.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
-    "dot-env": "^2.0.0",
+    "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
