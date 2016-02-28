@@ -1,6 +1,10 @@
 .containernavpadding {
   padding-top: 80px;
 }
+
+body {
+  background: url(light-grey.png);
+}
 img {
  height: 150px;
 width: 150px; 
