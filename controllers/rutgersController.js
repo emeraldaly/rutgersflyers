@@ -80,6 +80,18 @@ router.get('/register', function(req, res) {
   });
 });
 
+router.post("/venuesCreate", function(req, res) {
+  models.VenueX.create({
+    name:req.body.name,
+    address:req.body.phoneNumber,
+    phoneNumber:req.body.phoneNumber,
+    website:req.body.website,
+    CategoryId:req.body.CategoryId
+    }).then(function() {
+    res.redirect('/');
+})
+});
+
 router.post("/register", function(req, res){
   console.log(req.body);
   models.UserX.findOne({where: {email: req.body.email}}).then(function(results) {
