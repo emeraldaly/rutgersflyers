@@ -126,6 +126,18 @@ router.post('/login',
       successRedirect: '/teachers?msg=login successful',
       failureRedirect: '/login?msg=login unsuccessful, please check your email and password or if you haven\'t done so, please register'
     }));
+
+//results
+router.get('/results', function (req, req) {
+  res.render('/detailResults', {
+    msg: req.query.msg
+  });
+});
+router.get('/ctgresults', function (req, req) {
+  res.render('/categoryResults', {
+    msg: req.query.msg
+  });
+});
 //logout
 router.get('/logout', function (req, res){
   req.logOut();
