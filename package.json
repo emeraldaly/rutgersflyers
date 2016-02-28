@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engines": {
     "node": "5.6.0"
-  }, 
+  },
   "description": "A social app intended for incoming students that explores events/museums/restaurants/retail, etc. in and around Rutgers-New Brunswick.",
   "main": "server1.js",
   "scripts": {
