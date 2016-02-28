@@ -1,7 +1,7 @@
+//express setup
 var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 9000;
-
 var expressHandlebars = require('express-handlebars');
 //passport
 var passport = require('passport');
@@ -20,9 +20,9 @@ var Sequelize = require('sequelize');
 
 if(process.env.NODE_ENV === 'production') {
   // HEROKU DB
-  console.log(process.env.jawsdb);
+  console.log(process.env.JAWSDB_URL);
 
-  var connection = new Sequelize(process.env.jawsdb);
+  var connection = new Sequelize(process.env.JAWSDB_URL);
 }
 else {
   // LOCAL DB
@@ -102,7 +102,7 @@ passport.use('local', new LocalStrategy({
   passwordField: "password"
 },
 function(req, email, password, done) {
-  models.UserX.findOne({
+  User.findOne({
     where: {
       email: email
     }
@@ -146,11 +146,11 @@ app.get('/register', function(req, res) {
 
 app.post("/register", function(req, res){
   console.log(req.body);
-  models.UserX.findOne({where: {email: req.body.email}}).then(function(results) {
+  User.findOne({where: {email: req.body.email}}).then(function(results) {
     if(results){
       res.redirect("/login?msg=Your email is already registered. Please login");}
     else {
-      models.User.create({
+      User.create({
         username: req.body.username,
         lname: req.body.lname,
         fname: req.body.fname,
@@ -197,53 +197,29 @@ app.get('/logout', function (req, res){
     res.redirect('/'); //Inside a callback… bulletproof!
   });
 });
+connection.sync();
 
-//database connection
-  app.listen(PORT, function() {
-      console.log("Listening on:" + PORT)
-  });/express setup
-var express = require('express');
-var app = express();
-var PORT = process.env.PORT || 9000;
+User.bulkCreate([
+	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
+   { lname: 'Svenson', fname: 'Richard', password: 'tester', username: 'Richardinhouse', email:'richardinhouse@gmail.com' },
+   { lname: 'Varga', fname: 'Taylor', password: 'tester', username: 'cuttlefish01', email:'cuttlefish@gmail.com' },
+   { lname: 'Wong', fname: 'Kaleigh', password: 'tester', username: 'kwong1', email:'kwong1@gmail.com' },
+   { lname: 'Blackwell', fname: 'Hillary', password: 'tester', username: 'hblackwell', email:'hblackwell@gmail.com' },
+   { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
+]);
 
-var expressHandlebars = require('express-handlebars');
-//passport
-var passport = require('passport');
-var passportLocal = require('passport-local');
-var session = require('express-session');
+//Venue.bulkCreate([
+//{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
+// { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
+//]);
 
-//bcrypt
-var bcrypt = require("bcryptjs");
+Category.bulkCreate([
+  { category: 'Food' },
+  { category: 'Transportation' },
+  { category: 'Services'},
+  { category: 'Events' }
 
-//bodyParser
-var bodyParser = require('body-parser');
-require('dotenv').config();
-//middleware
-app.use(express.static('public'));
-app.use(require('express-session')({
-  secret: "rutgerpridesecrets",
-  resave: true,
-  saveUninitialized: true,
-  cookie: {secure: false, maxAge: (1000 * 60 * 60 * 24 * 30) },
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-passport.deserializeUser(function(id, done) {
-    done(null, { id: id, username: id })
-});
-app.engine('handlebars', expressHandlebars({
-    defaultLayout: 'main'
-}));
-app.set('view engine', 'handlebars');
-var routes = require('./controllers/rutgersController.js');
-app.use('/', routes);
-
+  ]);
 //database connection
   app.listen(PORT, function() {
       console.log("Listening on:" + PORT)
