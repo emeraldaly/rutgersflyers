@@ -27,10 +27,7 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
-<<<<<<< HEAD
     "dotenv": "^2.0.0",
-=======
->>>>>>> 085a58d47b505f0fbeeeae50648a5aec8d47c3f8
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
