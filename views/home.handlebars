@@ -1,4 +1,4 @@
-Skip to content
+<!-- Skip to content
 This repository  
 Search
 Pull requests
@@ -13,8 +13,8 @@ Branch: models Find file Copy pathrutgersflyers/views/home.handlebars
 3ace4bb  3 minutes ago
 @emeraldaly emeraldaly added tab results
 3 contributors @emeraldaly @evanbates @eliezerwohl
-RawBlameHistory     49 lines (42 sloc)  1.8 KB
-<body>
+RawBlameHistory     49 lines (42 sloc)  1.8 KB -->
+
   <div class="container">
     <div class="row">
       <div class="col-md-4">
@@ -53,6 +53,10 @@ RawBlameHistory     49 lines (42 sloc)  1.8 KB
                  </div>
                </div>
             </table>
+                        <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#foodModal">
+              Create New Food Location
+            </button>
 
             </div>
             <div role="tabpanel" class="tab-pane" id="events">
@@ -79,7 +83,11 @@ RawBlameHistory     49 lines (42 sloc)  1.8 KB
                </div>
             </table>
               </table>
-
+<!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#eventsModal">
+             Create New Event
+            </button>
+<!-- Button trigger modal -->
             </div>
             <div role="tabpanel" class="tab-pane" id="transportation">
               <table class="table table-bordered">
@@ -104,8 +112,11 @@ RawBlameHistory     49 lines (42 sloc)  1.8 KB
                  </div>
                </div>
             </table>
-              </table>
-
+          </table>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#transportationModal">
+            Create new Transportation
+          </button>
             </div>
             <div role="tabpanel" class="tab-pane" id="services">
               <table class="table table-bordered">
@@ -127,12 +138,15 @@ RawBlameHistory     49 lines (42 sloc)  1.8 KB
                         <span class="glyphicon glyphicon-star"></span>
                         </p>
                     </div>
-                 </div>
-               </div>
-            </table>
+                  </div>
+                <!-- </div> -->
+                </table>
               </table>
-
-            </div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#servicesModal">
+                create new service
+              </button>
+            </div> <!-- end tab panel -->
           </div>
 
         </div>
@@ -150,4 +164,7 @@ RawBlameHistory     49 lines (42 sloc)  1.8 KB
     </section>
     </div>
   </div>
-</body>
+  {{> events }}
+{{> food }}
+{{> services }}
+{{> transportation }}

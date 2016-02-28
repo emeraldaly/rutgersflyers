@@ -3,6 +3,9 @@ var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 9000;
 var expressHandlebars = require('express-handlebars');
+//code below is for used for partials
+
+
 //passport
 var passport = require('passport');
 var passportLocal = require('passport-local');
@@ -37,6 +40,13 @@ app.engine('handlebars', expressHandlebars({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+
+var hbs = require('express-handlebars').create();
+ 
+hbs.getPartials().then(function (partials) {
+    console.log(partials);
+    });
+
 var routes = require('./controllers/rutgersController.js');
 app.use('/', routes);
 
