@@ -49,7 +49,19 @@ class="imgbrandimg" src="/img/wrlogo.png"></a>
 
           </ul>
         </li>
-        <li><a href="/addvenue">Add Venue</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add Venue <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#foodModal"> Food</button></li>
+             <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#eventsModal"> events</button> </li>
+              <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#servicesModal"> Services</button> </li>
+               <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#transportationModal"> Transportation</button> </li>
+           
+
+
+
+          </ul>
+        </li>
         <li><a href="/register">Register</a></li>
         <li><a href="#">Search</a></li>
           <li><a href="/logout">Logout</a></li>
@@ -59,6 +71,10 @@ class="imgbrandimg" src="/img/wrlogo.png"></a>
 </nav>
 
     {{{ body }}}
+      {{> events }}
+{{> food }}
+{{> services }}
+{{> transportation }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>

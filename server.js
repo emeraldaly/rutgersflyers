@@ -3,6 +3,9 @@ var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 9000;
 var expressHandlebars = require('express-handlebars');
+//code below is for used for partials
+
+
 //passport
 var passport = require('passport');
 var session = require('express-session');
@@ -56,6 +59,14 @@ app.engine('handlebars', expressHandlebars({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+
+
+var hbs = require('express-handlebars').create();
+ 
+hbs.getPartials().then(function (partials) {
+    console.log(partials);
+    });
+
 var User = connection.define ('User',{
  username : {
     type : Sequelize.STRING,
@@ -75,11 +86,27 @@ var User = connection.define ('User',{
   fname: Sequelize.STRING
  });
 
+ var Venue = connection.define('Venue', {  
+ name:  Sequelize.STRING,
+ address: Sequelize.STRING,
+ phoneNumber:Sequelize.STRING,
+ website:Sequelize.STRING 
+ });
+
+ var Review = connection.define('Review', {
+ review: Sequelize.TEXT,
+ rating:{
+  type:Sequelize.INTEGER,
+   min: 1, 
+   max:5 
+  },
+ });
 
  var Category = connection.define('Category', {
   category: Sequelize.STRING
  });
-
+  Category.hasMany(Venue);
+ Venue.hasMany(Review);
 
 function yelpFunc(var1, var2) {
   var1 = 'new brunswick';
@@ -148,6 +175,18 @@ app.get("/addvenue", function(req, res){
 
 }); 
 
+app.post("/venuesCreate", function(req, res) {
+ Venue.create({
+    name:req.body.name,
+    address:req.body.phoneNumber,
+    phoneNumber:req.body.phoneNumber,
+    website:req.body.website,
+    CategoryId:req.body.CategoryId
+    }).then(function() {
+    res.redirect('/');
+})
+});
+
 app.post("/register", function(req, res){
   console.log(req.body);
   User.findOne({where: {email: req.body.email}}).then(function(results) {
@@ -203,27 +242,28 @@ app.get('/logout', function (req, res){
 });
 connection.sync();
 
-User.bulkCreate([
-	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
-   { lname: 'Svenson', fname: 'Richard', password: 'tester', username: 'Richardinhouse', email:'richardinhouse@gmail.com' },
-   { lname: 'Varga', fname: 'Taylor', password: 'tester', username: 'cuttlefish01', email:'cuttlefish@gmail.com' },
-   { lname: 'Wong', fname: 'Kaleigh', password: 'tester', username: 'kwong1', email:'kwong1@gmail.com' },
-   { lname: 'Blackwell', fname: 'Hillary', password: 'tester', username: 'hblackwell', email:'hblackwell@gmail.com' },
-   { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
-]);
+// User.bulkCreate([
+// 	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
+//    { lname: 'Svenson', fname: 'Richard', password: 'tester', username: 'Richardinhouse', email:'richardinhouse@gmail.com' },
+//    { lname: 'Varga', fname: 'Taylor', password: 'tester', username: 'cuttlefish01', email:'cuttlefish@gmail.com' },
+//    { lname: 'Wong', fname: 'Kaleigh', password: 'tester', username: 'kwong1', email:'kwong1@gmail.com' },
+//    { lname: 'Blackwell', fname: 'Hillary', password: 'tester', username: 'hblackwell', email:'hblackwell@gmail.com' },
+//    { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
+// ]);
 
 //Venue.bulkCreate([
 //{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
 // { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
 //]);
 
-Category.bulkCreate([
-  { category: 'Food' },
-  { category: 'Transportation' },
-  { category: 'Services'},
-  { category: 'Events' }
+// Category.bulkCreate([
+//   { category: 'Food' },
+//   { category: 'Transportation' },
+//   { category: 'Services'},
+//   { category: 'Events' }
 
-  ]);
+
+  // ]);
 //database connection
   app.listen(PORT, function() {
       console.log("Listening on:" + PORT)
