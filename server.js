@@ -16,7 +16,6 @@ var LocalStrategy = require('passport-local').Strategy;
 var yelpyodel = require('yelp');
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
-
 if(process.env.NODE_ENV === 'production') {
   // HEROKU DB
   console.log(process.env.JAWSDB_URL);
@@ -167,6 +166,16 @@ app.post("/register", function(req, res){
     }
   })
 });
+
+//app.get("/restaurants", function(req, res){
+
+//res.send(Venue.findAll({ where: { age: { gt: 12 } } }) 
+
+
+//}
+
+
+
 app.get('/test', function(req, res){
 var x = yelp.search({term: 'food', location: 'Philadelphia'});
 //models.VenuesX.create({
