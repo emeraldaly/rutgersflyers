@@ -2,7 +2,6 @@
 var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 9000;
-var dotenv = require('dotenv');
 var expressHandlebars = require('express-handlebars');
 //passport
 var passport = require('passport');
@@ -21,9 +20,9 @@ var Sequelize = require('sequelize');
 
 if(process.env.NODE_ENV === 'production') {
   // HEROKU DB
-  console.log(process.env.jawsdb);
+  console.log(process.env.JAWSDB_URL);
 
-  var connection = new Sequelize(process.env.jawsdb);
+  var connection = new Sequelize(process.env.JAWSDB_URL);
 }
 else {
   // LOCAL DB
@@ -103,7 +102,7 @@ passport.use('local', new LocalStrategy({
   passwordField: "password"
 },
 function(req, email, password, done) {
-  models.UserX.findOne({
+  User.findOne({
     where: {
       email: email
     }
