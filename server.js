@@ -144,6 +144,11 @@ app.get('/register', function(req, res) {
   });
 });
 
+app.get("/addvenue", function(req, res){
+ res.render("addvenue");
+
+}); 
+
 app.post("/register", function(req, res){
   console.log(req.body);
   User.findOne({where: {email: req.body.email}}).then(function(results) {
