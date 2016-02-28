@@ -6,13 +6,12 @@ var expressHandlebars = require('express-handlebars');
 //passport
 var passport = require('passport');
 var session = require('express-session');
-
 //bcrypt
 var bcrypt = require("bcryptjs");
 
 //bodyParser
 var bodyParser = require('body-parser');
-require('dotenv').config();
+require("dotenv").config();
 var LocalStrategy = require('passport-local').Strategy;
 var yelpyodel = require('yelp');
 var mysql = require('mysql');
