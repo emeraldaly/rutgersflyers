@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Rutgers Flyers</title>
+    <title>WhereRU</title>
     <meta charset="UTF-8">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" crossorigin="anonymous">
@@ -23,14 +23,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Last Five<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Search</a></li>
-        
+       
       </ul>
-      <a class="navbar-brand brand1" href="#">WhereRU</a>
-      </form>
+      <a class="linklogo imgbrand" href="/">WhereRU<img
+class="imgbrandimg" src="/img/wrlogo.png"></a>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/Register">Register</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -43,7 +40,6 @@
               <label for="">Password:</label>
               <input type="password" class="input-sm form-control loginInput" name="password">
             </div>
-      
 
             <button type="submit" class="btn btn-block btn-default">Submit</button>
           </form>
@@ -53,13 +49,32 @@
 
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add Venue <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#foodModal"> Food</button></li>
+             <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#eventsModal"> events</button> </li>
+              <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#servicesModal"> Services</button> </li>
+               <li> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#transportationModal"> Transportation</button> </li>
+           
+
+
+
+          </ul>
+        </li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="#">Search</a></li>
+          <li><a href="/logout">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-    <body>
     {{{ body }}}
+      {{> events }}
+{{> food }}
+{{> services }}
+{{> transportation }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>

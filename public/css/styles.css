@@ -1,33 +1,47 @@
 .containernavpadding {
-  padding-top: 80px;
+  padding-top: 50px;
 }
-img {
- height: 150px;
-width: 150px; 
-padding: 10px;
+.navbar{
+  position: relative;
 }
-
+a.linklogo {
+  color: white;
+}
+.icons {
+  margin-left: -20px;
+}
+.imgbrand {
+  font-size: 120%;
+  font-color: white;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  margin: auto;
+}
+.imgbrandimg {
+  height: 55px;
+  padding-bottom: 14px;
+}
+.img1{
+  height: 120px;
+  width: 120px; 
+  padding: 10px;
+}
+.navbar {
+  font-size: 1.1em;
+}
 
 h3 {
   text-align: center;
 }
 h2{
-font-family: "Raleway";
+  font-family: "Raleway";
 }
-
+.loginInput {
+  width: 250px
+}
 .dropdown-menu {
-padding:10px;
-}
-
-.navbar{
-  font-size: 1.1em;
-}
-.brand1{
-font-size: 120%;
-width: 100%;
-left: 0;
-position: absolute;
-text-align: center;
-margin: auto;
+  padding:10px;
 }
 
