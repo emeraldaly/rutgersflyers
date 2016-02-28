@@ -3,16 +3,29 @@
 		<title>Add a Listing</title>
 	</head>
 	<body>
-		<div class="container containernavpadding">
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
-					<h3>Add a Venue</h3>
-          <h4> {{msg}}</h4>
-				</div>
-			</div>
-      <!-- <div class="col-md-3"></div> -->
+  <div class="container containernavpadding">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Nav tabs -->
+        <ul class="nav class icons nav-tabs" role="tablist">
+          <li role="presentation"><a href="#food" aria-controls="food"
+              role="tab" data-toggle="tab">Food<div> <img
+                         src="/img/spotfood.png" class="img1"></div></a></li>
+          <li role="presentation"><a href="#events" aria-controls="events"
+              role="tab" data-toggle="tab">Events<div> <img
+                src="/img/spotcalendar.png" class="img1"></div></a></li>
+          <li role="presentation"><a href="#transportation"
+          aria-controls="transportation" role="tab"
+          data-toggle="tab">Transportation<div> <img
+          src="/img/spottransportation.png" class="img1"> </div> </a></li>
+          <li role="presentation"><a href="#services" aria-controls="services"
+          role="tab" data-toggle="tab">Services<div><img
+          src="/img/spotservices.png" class="img1"></div> </a></li>
+        </ul>
+      </div>
 
-				<div class="col-md-4 col-md-offset-4">
+				<div class="col-md-5">
+					<h3>Add a Venue</h3>
 					<form role="form" method="post" action="/addvenue">
 						<div class="form-group">
 							<label for="venuename">Venue Name:</label>
@@ -35,4 +48,5 @@
 						</div>
 					</form>
 				</div> <!-- close col -->
-
+    </div>
+  </div>
