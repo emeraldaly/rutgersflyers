@@ -7,7 +7,7 @@ var expressHandlebars = require('express-handlebars');
 //passport
 var passport = require('passport');
 var passportLocal = require('passport-local');
-//var session = require('express-session');
+var session = require('express-session');
 
 //bcrypt
 var bcrypt = require("bcryptjs");
