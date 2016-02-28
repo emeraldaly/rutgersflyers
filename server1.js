@@ -21,9 +21,9 @@ var Sequelize = require('sequelize');
 
 if(process.env.NODE_ENV === 'production') {
   // HEROKU DB
-  console.log(process.env.JAWSDB_URL);
+  console.log(process.env.jawsdb);
 
-  var connection = new Sequelize(process.env.JAWSDB_URL);
+  var connection = new Sequelize(process.env.jawsdb);
 }
 else {
   // LOCAL DB
@@ -147,11 +147,11 @@ app.get('/register', function(req, res) {
 
 app.post("/register", function(req, res){
   console.log(req.body);
-  models.UserX.findOne({where: {email: req.body.email}}).then(function(results) {
+  User.findOne({where: {email: req.body.email}}).then(function(results) {
     if(results){
       res.redirect("/login?msg=Your email is already registered. Please login");}
     else {
-      models.User.create({
+      User.create({
         username: req.body.username,
         lname: req.body.lname,
         fname: req.body.fname,
