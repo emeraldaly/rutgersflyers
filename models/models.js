@@ -1,16 +1,18 @@
 //database setup
 var mysql = require('mysql');
 var Sequelize = require('sequelize');
+var jawsdb = "mysql://rvld6wmrqp5dybhn:ffy7l7tcmjx5i8px@l3855uft9zao23e2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/vtytap7pf76e05c7";
+
 if(process.env.NODE_ENV === 'production') {
   // HEROKU DB
-  console.log(process.env.JAWSDB__URL);
-  var connection = new Sequelize(process.env.JAWSDB__URL);
+  console.log(process.env.jawsdb);
+
+  var connection = new Sequelize(process.env.jawsdb);
 } 
 else {
   // LOCAL DB
   var connection = new Sequelize('rutgersflyers_db', 'root');
 }
-
 
 var User = connection.define ('User',{
  username : {
