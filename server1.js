@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 9000;
-
+var dotenv = require('dotenv');
 var expressHandlebars = require('express-handlebars');
 //passport
 var passport = require('passport');
