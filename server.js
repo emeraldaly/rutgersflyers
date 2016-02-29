@@ -108,9 +108,8 @@ var User = connection.define ('User',{
  Venue.hasMany(Review);
 
 function yelpFunc(var1, var2) {
-  var1 = 'new brunswick';
 
-  yelp.search({ term: var1, location: 'New Brunswick' })
+  yelp.search({ term: var1, location: var2 })
 .then(function (data) {
   console.log(data);
 })
@@ -118,7 +117,6 @@ function yelpFunc(var1, var2) {
   console.error(err);
 });
 }
-
 
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
@@ -169,15 +167,11 @@ app.get('/register', function(req, res) {
   });
 });
 
-app.get("/addvenue", function(req, res){
- res.render("addvenue");
-
-}); 
 
 app.post("/venuesCreate", function(req, res) {
  Venue.create({
     name:req.body.name,
-    address:req.body.phoneNumber,
+    address:req.body.address,
     phoneNumber:req.body.phoneNumber,
     website:req.body.website,
     CategoryId:req.body.CategoryId
@@ -206,30 +200,44 @@ app.post("/register", function(req, res){
   })
 });
 
-//app.get("/restaurants", function(req, res){
-
-//res.send(Venue.findAll({ where: { age: { gt: 12 } } }) 
-
-
-//}
-
-
-
-app.get('/test', function(req, res){
-var x = yelp.search({term: 'food', location: 'Philadelphia'});
-//models.VenuesX.create({
-  //name: data.businesses[0].name,
-  //phoneNumber: data.businesses[0].display_phone,
- // website: 'www' + data.businesses[0].name + '.com',
- // address: data.businesses[0].display_address[0]+data.businesses[0].display_address[1]
-//})
-});
 
 app.get("/", function(req, res) {
-  res.render("home");
-})
+  res.redirect("/food");
+});
 
-//login get and post
+app.get("/events", function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 4}}).then(function(venues){
+    res.render("events", {venues});
+  });
+});
+
+app.get("/services", function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 3}}).then(function(venues){
+    res.render("services", {venues});
+  });
+});
+
+app.get('/food', function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 1}}).then(function(venues) {
+    res.render('food', {venues}); 
+       
+  });
+});
+
+app.get("/transportation", function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 2}}).then(function(venues){
+    res.render("transportation", {venues});
+  });
+});
+
 
 app.get('/login', function(req, res) {
   res.render('login', {
@@ -259,6 +267,10 @@ connection.sync();
 //    { lname: 'Blackwell', fname: 'Hillary', password: 'tester', username: 'hblackwell', email:'hblackwell@gmail.com' },
 //    { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
 // ]);
+
+Review.bulkCreate([
+    {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
+ ]);
 
 //Venue.bulkCreate([
 //{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },

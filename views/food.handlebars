@@ -1,0 +1,38 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Nav tabs -->
+        <ul class="nav icons nav-tabs">
+          <li class="active"><a href="/food">Food<div><img src="/img/spotfood.png" class="img1"></div></a></li>
+          <li><a href="/events" 
+                                >Events<div> <img
+                                src="/img/spotcalendar.png" class="img1"></div></a></li>
+          <li><a href="/transportation"
+                 >Transportation<div> <img
+                 src="/img/spottransportation.png" class="img1"> </div> </a></li>
+          <li><a href="/services" 
+                 >Services<div><img
+                 src="/img/spotservices.png" class="img1"></div> </a></li>
+        </ul>  
+      </div>
+      <div class="venuename">
+  <h4>Food</h4>
+               {{#each venues}}
+        <h4><a href="#">{{this.name}}</a></h4>
+        <p>  {{this.address}}</p>
+        <p>  {{this.phoneNumber}}</p>
+        {{/each}}</h3>
+      </div>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+      </div> 
+    </div>
+
+  </div>
+
+
+
+</body>
