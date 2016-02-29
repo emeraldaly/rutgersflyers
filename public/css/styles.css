@@ -7,9 +7,6 @@
 a.linklogo {
   color: white;
 }
-.icons {
-  margin-left: -20px;
-}
 .imgbrand {
   font-size: 120%;
   font-color: white;
@@ -35,6 +32,9 @@ a.linklogo {
 h3 {
   text-align: center;
 }
+h4{
+ color: #df665b;
+ } 
 h2{
   font-family: "Raleway";
 }
@@ -44,4 +44,6 @@ h2{
 .dropdown-menu {
   padding:10px;
 }
-
+.hbname{
+color: #df665b;
+}

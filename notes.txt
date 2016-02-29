@@ -1,0 +1,18 @@
+food modal
+-------
+city, state, zip
+
+
+event modal
+---------
+time
+city, state, zip
+
+services modal
+-------------
+city, state, zip
+
+transportation modal
+----------
+city, state, zip
+
