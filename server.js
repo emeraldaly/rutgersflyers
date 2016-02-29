@@ -245,6 +245,71 @@ app.get('/food', function(req,res) {
 });
   });
 
+app.get('/food/:p', function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('foodDetail', {
+      Venues: Venues
+    })
+});
+  });
+
+app.get('/events/:p', function(req,res) {
+  var x = req.params.p;
+  
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('eventsDetail', {
+      Venues : Venues
+    })
+});
+  });
+
+app.get('/services/:p', function(req,res) {
+  var x = req.params.p;
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('servicesDetail', {
+      Venues : Venues
+    })
+});
+  });
+
+app.get('/transportation/:p', function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('transportationDetail', {
+      Venues : Venues
+    })
+});
+  });
+
+
 app.get("/transportation", function(req, res) {
   Venue.findAll({
     where: {
@@ -254,7 +319,7 @@ app.get("/transportation", function(req, res) {
   ]
   }).then(function(Venues){
     res.render("transportation", {
-      Venues: Venues
+      Venues: {Venues}
     })
   });
 });

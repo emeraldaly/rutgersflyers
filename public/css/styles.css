@@ -42,6 +42,9 @@ a.title{
 h2{
   font-family: "Raleway";
 }
+.detitle{
+  color: #32A490;
+}
 .loginInput {
   width: 250px
 }
