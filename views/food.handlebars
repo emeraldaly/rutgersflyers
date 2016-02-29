@@ -1,0 +1,46 @@
+<body>
+<div class="container">
+<div class="row">
+<div class="col-md-3">
+<!-- Nav tabs -->
+<ul class="nav icons nav-tabs">
+<li role="presentation" class="active"><a href="#food" aria-controls="food"
+role="tab" data-toggle="tab">Food
+<div><img src="/img/spotfood.png" class="img1"></div></a></li>
+<li role="presentation"><a href="#events" aria-controls="events"
+role="tab" data-toggle="tab">Events<div> <img
+src="/img/spotcalendar.png" class="img1"></div></a></li>
+<li role="presentation"><a href="#transportation"
+aria-controls="transportation" role="tab"
+data-toggle="tab">Transportation<div> <img
+src="/img/spottransportation.png" class="img1"> </div> </a></li>
+<li role="presentation"><a href="#services" aria-controls="services"
+role="tab" data-toggle="tab">Services<div><img
+src="/img/spotservices.png" class="img1"></div> </a></li>
+</ul>  
+</div>
+<div class="venuename">
+  <h4>Food</h4>
+<br>
+{{#each venues}}
+<h4><a href="#">{{this.name}}</a></h4>
+<p>  {{this.address}}</p>
+<p>  {{this.phoneNumber}}</p>
+{{/each}}</h3>
+</div>
+<div class="ratings">
+<p>15 reviews</p>
+<p>
+<span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    </p>
+            </div> 
+</div>
+
+</div>
+
+
+
+</body>

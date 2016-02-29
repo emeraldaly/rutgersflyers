@@ -35,6 +35,9 @@ a.linklogo {
 h3 {
   text-align: center;
 }
+h4{
+ color: #ebebeb;
+ } 
 h2{
   font-family: "Raleway";
 }
@@ -44,4 +47,6 @@ h2{
 .dropdown-menu {
   padding:10px;
 }
+.venuename{
 
+}

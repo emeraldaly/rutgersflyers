@@ -177,7 +177,7 @@ app.get("/addvenue", function(req, res){
 app.post("/venuesCreate", function(req, res) {
  Venue.create({
     name:req.body.name,
-    address:req.body.phoneNumber,
+    address:req.body.address,
     phoneNumber:req.body.phoneNumber,
     website:req.body.website,
     CategoryId:req.body.CategoryId
@@ -206,12 +206,6 @@ app.post("/register", function(req, res){
   })
 });
 
-//app.get("/restaurants", function(req, res){
-
-//res.send(Venue.findAll({ where: { age: { gt: 12 } } }) 
-
-
-//}
 
 
 
@@ -226,8 +220,17 @@ var x = yelp.search({term: 'food', location: 'Philadelphia'});
 });
 
 app.get("/", function(req, res) {
-  res.render("home");
-})
+  res.redirect("/food");
+});
+
+
+app.get("/food", function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 1}}).then(function(venues){
+    res.render("food", {venues});
+  });
+});
 
 //login get and post
 
