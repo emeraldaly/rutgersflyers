@@ -42,6 +42,10 @@ a.title{
 h2{
   font-family: "Raleway";
 }
+.detailcont{
+padding-top: 50px;
+
+}
 .detitle{
   color: #32A490;
 }

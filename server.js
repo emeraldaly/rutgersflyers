@@ -231,6 +231,21 @@ app.get("/services", function(req, res) {
   });
 });
 
+app.get('/transportation', function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 2},
+  include: [
+  {model:Review}
+  ]
+  }).then(function(Venues){
+    res.render("transportation", {
+      Venues: Venues
+    })
+  });
+});
+
+
 app.get('/food', function(req,res) {
   Venue.findAll({
     where: {
@@ -295,7 +310,6 @@ app.get('/services/:p', function(req,res) {
 
 app.get('/transportation/:p', function(req,res) {
   var x = req.params.p;
-  console.log(x);
   Venue.findAll({
     where: {
       "id" : x},
@@ -309,20 +323,6 @@ app.get('/transportation/:p', function(req,res) {
 });
   });
 
-
-app.get("/transportation", function(req, res) {
-  Venue.findAll({
-    where: {
-      CategoryId: 2},
-  include: [
-  {model:Review}
-  ]
-  }).then(function(Venues){
-    res.render("transportation", {
-      Venues: {Venues}
-    })
-  });
-});
 
 
 app.get('/login', function(req, res) {
