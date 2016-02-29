@@ -20,10 +20,9 @@
         <h4>Food</h4>
         <br>
         {{#each Venues}}
-        <h4>     {{this.name}}</h4>
+        <a class="title" href="/food/{{this.id}}"><h4>     {{this.name}}</h4></a>
                <p>
                {{#each Reviews}}
-
                {{this.review}}...<span
            class="rating">Rating: </span>{{this.rating}}
          <p> {{/each}}
