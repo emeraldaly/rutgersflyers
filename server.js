@@ -208,33 +208,54 @@ app.get("/", function(req, res) {
 app.get("/events", function(req, res) {
   Venue.findAll({
     where: {
-      CategoryId: 4}}).then(function(venues){
-    res.render("events", {venues});
+      CategoryId: 4},
+    include: [
+    {model: Review}
+    ]
+  }).then(function(Venues){
+    res.render("events", {Venues: Venues})
   });
 });
 
 app.get("/services", function(req, res) {
   Venue.findAll({
     where: {
-      CategoryId: 3}}).then(function(venues){
-    res.render("services", {venues});
+      CategoryId: 3},
+    include: [
+    {model:Review}
+    ]
+  }).then(function(Venues){
+    res.render("services", {
+      Venues: Venues
+    })
   });
 });
 
-app.get('/food', function(req, res) {
+app.get('/food', function(req,res) {
   Venue.findAll({
     where: {
-      CategoryId: 1}}).then(function(venues) {
-    res.render('food', {venues}); 
-       
-  });
+      CategoryId: 1},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('food', {
+      Venues : Venues
+    })
 });
+  });
 
 app.get("/transportation", function(req, res) {
   Venue.findAll({
     where: {
-      CategoryId: 2}}).then(function(venues){
-    res.render("transportation", {venues});
+      CategoryId: 2},
+  include: [
+  {model:Review}
+  ]
+  }).then(function(Venues){
+    res.render("transportation", {
+      Venues: Venues
+    })
   });
 });
 
