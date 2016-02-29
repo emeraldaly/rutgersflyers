@@ -117,8 +117,6 @@ function yelpFunc(var1, var2) {
   console.error(err);
 });
 }
-var x = yelpFunc("hotels", "new brunswick");
-console.log(x);
 
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
@@ -223,11 +221,12 @@ app.get("/services", function(req, res) {
   });
 });
 
-app.get("/food", function(req, res) {
+app.get('/food', function(req, res) {
   Venue.findAll({
     where: {
-      CategoryId: 1}}).then(function(venues){
-    res.render("food", {venues});
+      CategoryId: 1}}).then(function(venues) {
+    res.render('food', {venues}); 
+       
   });
 });
 
@@ -268,6 +267,10 @@ connection.sync();
 //    { lname: 'Blackwell', fname: 'Hillary', password: 'tester', username: 'hblackwell', email:'hblackwell@gmail.com' },
 //    { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
 // ]);
+
+Review.bulkCreate([
+    {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
+ ]);
 
 //Venue.bulkCreate([
 //{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
