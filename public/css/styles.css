@@ -20,6 +20,10 @@ a.linklogo {
   height: 55px;
   padding-bottom: 14px;
 }
+.rating{
+color: #df665b;
+
+}
 .img1{
   height: 120px;
   width: 120px; 
@@ -32,11 +36,18 @@ a.linklogo {
 h3 {
   text-align: center;
 }
-h4{
+a.title{
  color: #df665b;
  } 
 h2{
   font-family: "Raleway";
+}
+.detailcont{
+padding-top: 50px;
+
+}
+.detitle{
+  color: #32A490;
 }
 .loginInput {
   width: 250px
