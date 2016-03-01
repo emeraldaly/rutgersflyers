@@ -208,35 +208,121 @@ app.get("/", function(req, res) {
 app.get("/events", function(req, res) {
   Venue.findAll({
     where: {
-      CategoryId: 4}}).then(function(venues){
-    res.render("events", {venues});
+      CategoryId: 4},
+    include: [
+    {model: Review}
+    ]
+  }).then(function(Venues){
+    res.render("events", {Venues: Venues})
   });
 });
 
 app.get("/services", function(req, res) {
   Venue.findAll({
     where: {
-      CategoryId: 3}}).then(function(venues){
-    res.render("services", {venues});
+      CategoryId: 3},
+    include: [
+    {model:Review}
+    ]
+  }).then(function(Venues){
+    res.render("services", {
+      Venues: Venues
+    })
   });
 });
 
-app.get('/food', function(req, res) {
+app.get('/transportation', function(req, res) {
   Venue.findAll({
     where: {
-      CategoryId: 1}}).then(function(venues) {
-    res.render('food', {venues}); 
-       
+      CategoryId: 2},
+  include: [
+  {model:Review}
+  ]
+  }).then(function(Venues){
+    res.render("transportation", {
+      Venues: Venues
+    })
   });
 });
 
-app.get("/transportation", function(req, res) {
+
+app.get('/food', function(req,res) {
   Venue.findAll({
     where: {
-      CategoryId: 2}}).then(function(venues){
-    res.render("transportation", {venues});
-  });
+      CategoryId: 1},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('food', {
+      Venues : Venues
+    })
 });
+  });
+
+app.get('/food/:p', function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('foodDetail', {
+      Venues: Venues
+    })
+});
+  });
+
+app.get('/events/:p', function(req,res) {
+  var x = req.params.p;
+  
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('eventsDetail', {
+      Venues : Venues
+    })
+});
+  });
+
+app.get('/services/:p', function(req,res) {
+  var x = req.params.p;
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('servicesDetail', {
+      Venues : Venues
+    })
+});
+  });
+
+app.get('/transportation/:p', function(req,res) {
+  var x = req.params.p;
+  Venue.findAll({
+    where: {
+      "id" : x},
+    include: [
+      {model:Review}
+    ]
+  }).then(function(Venues) {
+    res.render('transportationDetail', {
+      Venues : Venues
+    })
+});
+  });
+
 
 
 app.get('/login', function(req, res) {
