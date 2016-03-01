@@ -197,7 +197,6 @@ app.post("/register", function(req, res){
         email: req.body.email,
         password: saltyhash(req.body.password)
       }).then(function() {
-        console.log(req.user);
         res.redirect("/?msg=Thanks for registering, please login.");
       });
     }
@@ -206,7 +205,13 @@ app.post("/register", function(req, res){
 
 
 app.get("/", function(req, res) {
-  res.render("home1");
+   res.render('index');
+});
+
+app.get("/auth", function(req, res){
+ var x = req.user.username; 
+ console.log(req); 
+   res.render('index', {layout: 'maina.handlebars', user: x});
 });
 
 app.get("/events", function(req, res) {
@@ -235,9 +240,6 @@ app.get("/services", function(req, res) {
   });
 });
 
-app.get('/protect', function(req, res){
-  res.send("this is a text");
-});
 
 app.get('/transportation', function(req, res) {
   Venue.findAll({
@@ -332,16 +334,9 @@ app.get('/transportation/:p', function(req,res) {
 });
 
 
-
-app.get('/login', function(req, res) {
-  res.render('login', {
-    msg: req.query.msg
-  });
-});
-
 app.post('/login',
     passport.authenticate('local', {
-      successRedirect: '/?msg=login successful',
+      successRedirect: '/auth?msg=login successful',
       failureRedirect: '/?msg=login unsuccessful, please check your email and password or if you haven\'t done so, please register'
     }));
 //

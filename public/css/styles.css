@@ -4,6 +4,12 @@
 .navbar{
   position: relative;
 }
+a.hello{
+ font-size: 120%;
+color: #df665b;
+
+
+}
 a.linklogo {
   color: white;
 }

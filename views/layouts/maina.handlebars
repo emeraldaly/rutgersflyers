@@ -29,7 +29,7 @@ class="imgbrandimg" src="/img/wrlogo.png"></a>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-left">
-      <li><a href="#">Search</a></li>
+    
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add Venue <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -42,7 +42,6 @@ class="imgbrandimg" src="/img/wrlogo.png"></a>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
           <ul class="dropdown-menu">
            <form method="post" action="/login" id="login">
             <div class="form-group">
@@ -62,8 +61,8 @@ class="imgbrandimg" src="/img/wrlogo.png"></a>
 
           </ul>
         </li>
-      
-        <li><a href="/register">Register</a></li>
+        <li><a href="#"><span class="hello">Hello {{user}}!</span></a></li> 
+          <li><a href="/logout">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
