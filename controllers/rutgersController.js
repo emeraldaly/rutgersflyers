@@ -114,7 +114,7 @@ router.post("/register", function(req, res){
 router.get('/test', function(req, res){
   res.render("test");
 });
-var x = yelp.search({term: 'food', location: 'Philadelphia'});   
+var x = yelp.search({term: 'food', location: 'New Brunswick'});   
 //models.VenuesX.create({
   //name: data.businesses[0].name,
   //phoneNumber: data.businesses[0].display_phone,

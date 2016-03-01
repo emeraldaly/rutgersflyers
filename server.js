@@ -88,9 +88,17 @@ var User = connection.define ('User',{
  var Venue = connection.define('Venue', {  
  name:  Sequelize.STRING,
  address: Sequelize.STRING,
+ address2: Sequelize.STRING,
  phoneNumber:Sequelize.STRING,
- website:Sequelize.STRING 
+ website:Sequelize.STRING,
+ date: Sequelize.DATE,
+ time: Sequelize.TIME
+ 
  });
+
+ Review.findAndCountAll({ 
+  include: [
+  { rating: }]
 
  var Review = connection.define('Review', {
  review: Sequelize.TEXT,
@@ -281,7 +289,7 @@ connection.sync();
 //    { category: 'Food' },
 //    { category: 'Transportation' },
 //    { category: 'Services'},
-//    { category: 'Events' }
+//    { category: 'Events'},
 //    ]);
 //database connection
   app.listen(PORT, function() {
