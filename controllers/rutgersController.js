@@ -112,6 +112,8 @@ router.post("/register", function(req, res){
   })
 });
 router.get('/test', function(req, res){
+  res.render("test");
+});
 var x = yelp.search({term: 'food', location: 'Philadelphia'});   
 //models.VenuesX.create({
   //name: data.businesses[0].name,
@@ -119,7 +121,7 @@ var x = yelp.search({term: 'food', location: 'Philadelphia'});
  // website: 'www' + data.businesses[0].name + '.com', 
  // address: data.businesses[0].display_address[0]+data.businesses[0].display_address[1]
 //})
-});
+//});
 
 router.get("/", function(req, res) {
   res.render("home");

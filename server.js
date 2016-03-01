@@ -268,23 +268,21 @@ connection.sync();
 //    { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
 // ]);
 
-Review.bulkCreate([
-    {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
- ]);
+// Review.bulkCreate([
+//     {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
+//  ]);
 
 //Venue.bulkCreate([
 //{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
 // { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
 //]);
 
-Category.bulkCreate([
-   { category: 'Food' },
-   { category: 'Transportation' },
-   { category: 'Services'},
-   { category: 'Events' }
-
-
-   ]);
+// Category.bulkCreate([
+//    { category: 'Food' },
+//    { category: 'Transportation' },
+//    { category: 'Services'},
+//    { category: 'Events' }
+//    ]);
 //database connection
   app.listen(PORT, function() {
       console.log("Listening on:" + PORT)
