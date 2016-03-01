@@ -343,6 +343,16 @@ app.get('/logout', function (req, res){
     res.redirect('/'); //Inside a callback… bulletproof!
   });
 });
+
+            app.post('/review/:venueId', function(req, res) {
+  Review.create({
+review: req.body.review,
+rating:req.body.rating,
+    VenueId: req.params.venueId
+  }).then(function() {
+    res.redirect('/');
+  });
+});
 connection.sync();
 
 // User.bulkCreate([
@@ -363,14 +373,15 @@ Review.bulkCreate([
 // { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
 //]);
 
-Category.bulkCreate([
-   { category: 'Food' },
-   { category: 'Transportation' },
-   { category: 'Services'},
-   { category: 'Events' }
+
+// Category.bulkCreate([
+//    { category: 'Food' },
+//    { category: 'Transportation' },
+//    { category: 'Services'},
+//    { category: 'Events' }
 
 
-   ]);
+//    ]);
 //database connection
   app.listen(PORT, function() {
       console.log("Listening on:" + PORT)
