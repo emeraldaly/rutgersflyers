@@ -1,0 +1,33 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+     </div>
+      <div class="venuename col-md-6">
+        <br>
+        {{#each Venues}}
+        <h2 class="detitle">{{name}}</h2>
+               <p>{{this.address}} </p>
+               <p>{{this.phoneNumber}}</p>
+               <p>{{this.website}}</p>
+          
+               {{#each Reviews}}
+               <p>{{this.review}}
+               <p>Rating: {{this.rating}}
+               {{/each}}
+       {{/each}}     
+               
+               <br />
+        </div>
+      </div> 
+    </div>
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</body>
