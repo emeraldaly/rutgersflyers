@@ -16,6 +16,7 @@
                  src="/img/spotservices.png" class="img1"></div> </a></li>
         </ul>  
       </div>
+      <div class="col-md-9">
       <div class="venuename">
         <h4>Events</h4>
         <br>
@@ -23,6 +24,11 @@
         <h4><a href="#">{{this.name}}</a></h4>
         <p>  {{this.address}}</p>
         <p>  {{this.phoneNumber}}</p>
+        <form method="POST" action="/review/{{ id }}">
+              <input type="text" class="form-control"  placeholder="review" name="review">
+              <input type="text" class="form-control" placeholder="rating" name="rating">
+              <button type="submit" class="btn btn-default dataButton">submit review</button>
+            </form>
         {{/each}}</h3>
       </div>
       <div class="ratings">
@@ -37,7 +43,4 @@
     </div>
 
   </div>
-
-
-
-</body>
+  </div>
