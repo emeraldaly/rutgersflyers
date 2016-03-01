@@ -356,6 +356,15 @@ app.get('/logout', function (req, res){
 
 
 
+app.post('/review/:venueId', function(req, res) {
+Review.create({
+review: req.body.review,
+rating:req.body.rating,
+    VenueId: req.params.venueId
+  }).then(function() {
+    res.redirect('/');
+  });
+});
 connection.sync();
 
 // User.bulkCreate([
@@ -384,6 +393,7 @@ Category.bulkCreate([
 
 
 ]);
+
 //database connection
 app.listen(PORT, function() {
   console.log("Listening on:" + PORT)
