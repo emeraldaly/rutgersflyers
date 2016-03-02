@@ -27,7 +27,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 else {
   // LOCAL DB
-  var connection = new Sequelize('rutgersflyers_db1', 'root');
+  var connection = new Sequelize('rutgersflyers_db', 'root');
 }
 var yelp = new yelpyodel({
   consumer_key: 'YyYLFGh2r0HzFGhENX21YA',
