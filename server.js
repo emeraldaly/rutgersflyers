@@ -359,6 +359,16 @@ app.get('/logout', function (req, res){
     res.redirect('/'); //Inside a callback… bulletproof!
   });
 });
+
+            app.post('/review/:venueId', function(req, res) {
+  Review.create({
+review: req.body.review,
+rating:req.body.rating,
+    VenueId: req.params.venueId
+  }).then(function() {
+    res.redirect('back');
+  });
+});
 connection.sync();
 
 // User.bulkCreate([
@@ -377,13 +387,15 @@ connection.sync();
 // Venue.bulkCreate([
 // { name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
 // { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
-// ]);
+
+//]);
 
 // Category.bulkCreate([
 //    { category: 'Food' },
 //    { category: 'Transportation' },
 //    { category: 'Services'},
-//    { category: 'Events'},
+//    { category: 'Events' }
+
 //    ]);
 //database connection
   app.listen(PORT, function() {

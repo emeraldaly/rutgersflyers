@@ -60,3 +60,13 @@ padding-top: 50px;
 .hbname{
 color: #df665b;
 }
+
+.reviewForm{
+ display: none;
+}
+
+.ratingInput{
+  width: 10.0em;
+}
+
+
