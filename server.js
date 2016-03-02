@@ -102,7 +102,7 @@ var User = connection.define ('User',{
   type:Sequelize.INTEGER,
    min: 1, 
    max:5 
-
+ }
 });
 
 
@@ -122,7 +122,7 @@ function yelpFunc(var1, var2) {
     console.error(err);
   });
 }
-
+yelpFunc("restaurants", "new brunswick");
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
   passReqToCallback: true,
