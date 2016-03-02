@@ -27,7 +27,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 else {
   // LOCAL DB
-  var connection = new Sequelize('rutgersflyers_db', 'root');
+  var connection = new Sequelize('rutgersflyers_db1', 'root');
 }
 var yelp = new yelpyodel({
   consumer_key: 'YyYLFGh2r0HzFGhENX21YA',
@@ -95,10 +95,6 @@ var User = connection.define ('User',{
  time: Sequelize.TIME
  
  });
-
- Review.findAndCountAll({ 
-  include: [
-  { rating: }]
 
  var Review = connection.define('Review', {
  review: Sequelize.TEXT,
@@ -284,6 +280,18 @@ app.get('/food/:p', function(req,res) {
 });
   });
 
+app.get('/averages', function(req,res) {
+
+  Review.findAndCountAll({
+    where: {
+      VenueId: 1}
+  }).then(function(TestRat) {
+    res.render('test', {
+      TestRat : TestRat
+    })
+});
+  });
+
 app.get('/events/:p', function(req,res) {
   var x = req.params.p;
   
@@ -366,10 +374,10 @@ connection.sync();
 //     {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
 //  ]);
 
-//Venue.bulkCreate([
-//{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
+// Venue.bulkCreate([
+// { name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
 // { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
-//]);
+// ]);
 
 // Category.bulkCreate([
 //    { category: 'Food' },
