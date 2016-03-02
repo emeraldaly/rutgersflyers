@@ -117,7 +117,7 @@ function yelpFunc(var1, var2) {
     console.error(err);
   });
 }
-
+yelpFunc("restaurants", "new brunswick");
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
   passReqToCallback: true,
