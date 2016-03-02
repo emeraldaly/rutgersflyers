@@ -88,8 +88,12 @@ var User = connection.define ('User',{
  var Venue = connection.define('Venue', {  
  name:  Sequelize.STRING,
  address: Sequelize.STRING,
+ address2: Sequelize.STRING,
  phoneNumber:Sequelize.STRING,
- website:Sequelize.STRING 
+ website:Sequelize.STRING,
+ date: Sequelize.DATE,
+ time: Sequelize.TIME
+ 
  });
 
  var Review = connection.define('Review', {
@@ -276,6 +280,18 @@ app.get('/food/:p', function(req,res) {
 });
   });
 
+app.get('/averages', function(req,res) {
+
+  Review.findAndCountAll({
+    where: {
+      VenueId: 1}
+  }).then(function(TestRat) {
+    res.render('test', {
+      TestRat : TestRat
+    })
+});
+  });
+
 app.get('/events/:p', function(req,res) {
   var x = req.params.p;
   
@@ -364,22 +380,21 @@ connection.sync();
 //    { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
 // ]);
 
-Review.bulkCreate([
-    {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
- ]);
+// Review.bulkCreate([
+//     {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
+//  ]);
 
-//Venue.bulkCreate([
-//{ name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
+// Venue.bulkCreate([
+// { name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
 // { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
-//]);
 
+//]);
 
 // Category.bulkCreate([
 //    { category: 'Food' },
 //    { category: 'Transportation' },
 //    { category: 'Services'},
 //    { category: 'Events' }
-
 
 //    ]);
 //database connection

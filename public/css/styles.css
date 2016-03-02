@@ -32,7 +32,9 @@ color: #df665b;
 .navbar {
   font-size: 1.1em;
 }
-
+h4 {
+  font-color: #df665b;
+}
 h3 {
   text-align: center;
 }
