@@ -357,7 +357,7 @@ review: req.body.review,
 rating:req.body.rating,
     VenueId: req.params.venueId
   }).then(function() {
-    res.redirect('/');
+    res.redirect('back');
   });
 });
 connection.sync();
