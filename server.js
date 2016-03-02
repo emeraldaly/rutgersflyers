@@ -35,7 +35,7 @@ var yelp = new yelpyodel({
   token: 'BpQbEeWyTT0vEiek3OI8OiZisCVvPucX',
   token_secret: '7PYYhCqDr8awrETlGYWHEiCW__M'
 });
- //middleware
+//middleware
 app.use(express.static('public'));
 app.use(require('express-session')({
   secret: "rutgerpridesecrets",
@@ -46,37 +46,37 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }));
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+  done(null, user.id);
 });
 passport.deserializeUser(function(id, done) {
-    done(null, { id: id, username: id })
+  done(null, { id: id, username: id })
 });
 app.engine('handlebars', expressHandlebars({
-    defaultLayout: 'main'
+  defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
 
 
 var hbs = require('express-handlebars').create();
- 
+
 hbs.getPartials().then(function (partials) {
-    console.log(partials);
-    });
+  console.log(partials);
+});
 
 var User = connection.define ('User',{
- username : {
+  username : {
     type : Sequelize.STRING,
     unique : true,
     allowNull: false
   },
-   password: {
+  password: {
     type:Sequelize.STRING,
     unique: true,
     allowNull:false
-   },
+  },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -102,24 +102,25 @@ var User = connection.define ('User',{
   type:Sequelize.INTEGER,
    min: 1, 
    max:5 
-  },
- });
 
- var Category = connection.define('Category', {
+});
+
+
+var Category = connection.define('Category', {
   category: Sequelize.STRING
- });
-  Category.hasMany(Venue);
- Venue.hasMany(Review);
+});
+Category.hasMany(Venue);
+Venue.hasMany(Review);
 
 function yelpFunc(var1, var2) {
 
   yelp.search({ term: var1, location: var2 })
-.then(function (data) {
-  console.log(data);
-})
-.catch(function (err) {
-  console.error(err);
-});
+    .then(function (data) {
+      console.log(data);
+    })
+  .catch(function (err) {
+    console.error(err);
+  });
 }
 
 //passport definition and bcrypt check
@@ -158,7 +159,11 @@ function saltyhash(pass) {
   var hash = bcrypt.hashSync(pass, salt);
   return hash;
 }
-
+function isAuth(req, res, next) {
+  if(req.isAuthenticated()){
+    return next();}
+  res.redirect("/?no_authorization");
+}
 
 //ROUTES
 //call yelp API
@@ -172,23 +177,23 @@ app.get('/register', function(req, res) {
 });
 
 
-app.post("/venuesCreate", function(req, res) {
- Venue.create({
+app.post("/venuesCreate", isAuth, function(req, res) {
+  Venue.create({
     name:req.body.name,
     address:req.body.address,
     phoneNumber:req.body.phoneNumber,
     website:req.body.website,
     CategoryId:req.body.CategoryId
-    }).then(function() {
+  }).then(function() {
     res.redirect('/');
-})
+  })
 });
 
 app.post("/register", function(req, res){
   console.log(req.body);
   User.findOne({where: {email: req.body.email}}).then(function(results) {
     if(results){
-      res.redirect("/login?msg=Your email is already registered. Please login");}
+      res.redirect("/?msg=Your email is already registered. Please login");}
     else {
       User.create({
         username: req.body.username,
@@ -197,8 +202,7 @@ app.post("/register", function(req, res){
         email: req.body.email,
         password: saltyhash(req.body.password)
       }).then(function() {
-        console.log(req.user);
-        res.redirect("/login?msg=Thanks for registering, please login.");
+        res.redirect("/?msg=Thanks for registering, please login.");
       });
     }
   })
@@ -206,16 +210,22 @@ app.post("/register", function(req, res){
 
 
 app.get("/", function(req, res) {
-  res.redirect("/food");
+   res.render('index');
+});
+
+app.get("/auth", function(req, res){
+ var x = req.user.username; 
+ console.log(req); 
+   res.render('index', {layout: 'maina.handlebars', user: x});
 });
 
 app.get("/events", function(req, res) {
   Venue.findAll({
     where: {
       CategoryId: 4},
-    include: [
-    {model: Review}
-    ]
+      include: [
+      {model: Review}
+      ]
   }).then(function(Venues){
     res.render("events", {Venues: Venues})
   });
@@ -225,9 +235,9 @@ app.get("/services", function(req, res) {
   Venue.findAll({
     where: {
       CategoryId: 3},
-    include: [
-    {model:Review}
-    ]
+      include: [
+      {model:Review}
+      ]
   }).then(function(Venues){
     res.render("services", {
       Venues: Venues
@@ -235,13 +245,14 @@ app.get("/services", function(req, res) {
   });
 });
 
+
 app.get('/transportation', function(req, res) {
   Venue.findAll({
     where: {
       CategoryId: 2},
-  include: [
-  {model:Review}
-  ]
+      include: [
+      {model:Review}
+      ]
   }).then(function(Venues){
     res.render("transportation", {
       Venues: Venues
@@ -254,15 +265,15 @@ app.get('/food', function(req,res) {
   Venue.findAll({
     where: {
       CategoryId: 1},
-    include: [
+      include: [
       {model:Review}
-    ]
+      ]
   }).then(function(Venues) {
     res.render('food', {
       Venues : Venues
     })
-});
   });
+});
 
 app.get('/food/:p', function(req,res) {
   var x = req.params.p;
@@ -270,15 +281,15 @@ app.get('/food/:p', function(req,res) {
   Venue.findAll({
     where: {
       "id" : x},
-    include: [
+      include: [
       {model:Review}
-    ]
+      ]
   }).then(function(Venues) {
     res.render('foodDetail', {
       Venues: Venues
     })
-});
   });
+});
 
 app.get('/averages', function(req,res) {
 
@@ -294,64 +305,58 @@ app.get('/averages', function(req,res) {
 
 app.get('/events/:p', function(req,res) {
   var x = req.params.p;
-  
+
   console.log(x);
   Venue.findAll({
     where: {
       "id" : x},
-    include: [
+      include: [
       {model:Review}
-    ]
+      ]
   }).then(function(Venues) {
     res.render('eventsDetail', {
       Venues : Venues
     })
-});
   });
+});
 
 app.get('/services/:p', function(req,res) {
   var x = req.params.p;
   Venue.findAll({
     where: {
       "id" : x},
-    include: [
+      include: [
       {model:Review}
-    ]
+      ]
   }).then(function(Venues) {
     res.render('servicesDetail', {
       Venues : Venues
     })
-});
   });
+});
 
 app.get('/transportation/:p', function(req,res) {
   var x = req.params.p;
   Venue.findAll({
     where: {
       "id" : x},
-    include: [
+      include: [
       {model:Review}
-    ]
+      ]
   }).then(function(Venues) {
     res.render('transportationDetail', {
       Venues : Venues
     })
-});
-  });
-
-
-
-app.get('/login', function(req, res) {
-  res.render('login', {
-    msg: req.query.msg
   });
 });
+
 
 app.post('/login',
     passport.authenticate('local', {
-      successRedirect: '/teachers?msg=login successful',
-      failureRedirect: '/login?msg=login unsuccessful, please check your email and password or if you haven\'t done so, please register'
+      successRedirect: '/auth?msg=login successful',
+      failureRedirect: '/?msg=login unsuccessful, please check your email and password or if you haven\'t done so, please register'
     }));
+//
 //logout
 app.get('/logout', function (req, res){
   req.logOut();
@@ -360,8 +365,11 @@ app.get('/logout', function (req, res){
   });
 });
 
-            app.post('/review/:venueId', function(req, res) {
-  Review.create({
+
+
+
+app.post('/review/:venueId', function(req, res) {
+Review.create({
 review: req.body.review,
 rating:req.body.rating,
     VenueId: req.params.venueId
@@ -371,33 +379,8 @@ rating:req.body.rating,
 });
 connection.sync();
 
-// User.bulkCreate([
-// 	{ lname: 'Bates', fname: 'Evan', password: 'tester', username: '11104eab', email:'111104eab@gmail.com' },
-//    { lname: 'Svenson', fname: 'Richard', password: 'tester', username: 'Richardinhouse', email:'richardinhouse@gmail.com' },
-//    { lname: 'Varga', fname: 'Taylor', password: 'tester', username: 'cuttlefish01', email:'cuttlefish@gmail.com' },
-//    { lname: 'Wong', fname: 'Kaleigh', password: 'tester', username: 'kwong1', email:'kwong1@gmail.com' },
-//    { lname: 'Blackwell', fname: 'Hillary', password: 'tester', username: 'hblackwell', email:'hblackwell@gmail.com' },
-//    { lname: 'Tryst', fname: 'Tristan', password: 'tester', username: 'tt_ru', email:'tt_ru@gmail.com' }
-// ]);
 
-// Review.bulkCreate([
-//     {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
-//  ]);
-
-// Venue.bulkCreate([
-// { name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
-// { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
-
-//]);
-
-// Category.bulkCreate([
-//    { category: 'Food' },
-//    { category: 'Transportation' },
-//    { category: 'Services'},
-//    { category: 'Events' }
-
-//    ]);
 //database connection
-  app.listen(PORT, function() {
-      console.log("Listening on:" + PORT)
-  });
+app.listen(PORT, function() {
+  console.log("Listening on:" + PORT)
+});
