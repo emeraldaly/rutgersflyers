@@ -5,7 +5,7 @@ var PORT = process.env.PORT || 9000;
 var expressHandlebars = require('express-handlebars');
 //code below is for used for partials
 //for username
-var x;
+var usern;
 //passport
 var passport = require('passport');
 var session = require('express-session');
@@ -92,8 +92,8 @@ var Venue = connection.define('Venue', {
   address2: Sequelize.STRING,
   phoneNumber:Sequelize.STRING,
   website:Sequelize.STRING,
-  date: Sequelize.DATE,
-  time: Sequelize.TIME
+  date: Sequelize.STRING,
+  time: Sequelize.STRING
 
 });
 
@@ -221,7 +221,6 @@ app.get("/", function(req, res){
       ['createdAt', 'DESC']
     ]
   }).then(function(Reviews) {
-    debugger;
       res.render('sortByNewest', {msg: req.query.msg,
         Reviews : Reviews
       })
@@ -229,7 +228,7 @@ app.get("/", function(req, res){
 })
 
 app.get("/auth", function(req, res){
-  x = req.user.username; 
+  usern = req.user.username; 
   Review.findAll({
     include: [
     {model:Venue}
@@ -240,7 +239,7 @@ app.get("/auth", function(req, res){
     ]
   }).then(function(Reviews) {
     console.dir(Reviews)
-      res.render('sortByNewest_a', {layout: 'maina.handlebars', user: x, msg: req.query.msg, Reviews: Reviews});
+      res.render('sortByNewest_a', {layout: 'maina.handlebars', user: usern, msg: req.query.msg, Reviews: Reviews});
   })
 })
 
@@ -297,7 +296,7 @@ app.get('/services_a', isAuth, function(req, res) {
       ]
   }).then(function(Venues){
     res.render("servicesa",{
-      Venues: Venues, layout: "maina.handlebars", user: x
+      Venues: Venues, layout: "maina.handlebars", user: usern
     })
   });
 });
@@ -311,7 +310,7 @@ app.get('/food_a', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('fooda', {
-      Venues: Venues, layout: "maina.handlebars", user: x
+      Venues: Venues, layout: "maina.handlebars", user: usern
     })
   });
 });
@@ -325,7 +324,7 @@ app.get('/transportation_a', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('transportationa', {
-      Venues: Venues, layout: "maina.handlebars", user: x
+      Venues: Venues, layout: "maina.handlebars", user: usern
     })
   });
 });
@@ -340,7 +339,7 @@ app.get('/events_a', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('eventsa', {
-      Venues: Venues, layout: "maina.handlebars", user: x
+      Venues: Venues, layout: "maina.handlebars", user: usern
     })
   });
 });
@@ -389,7 +388,7 @@ app.get('/food_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('foodDetaila', {
-      Venues: Venues, layout:"maina.handlebars", user:x
+      Venues: Venues, layout:"maina.handlebars", user: usern  
     })
   });
 });
@@ -405,7 +404,7 @@ app.get('/events_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('eventsDetaila', {
-      Venues: Venues, layout: "maina.handlebars", user: x
+      Venues: Venues, layout: "maina.handlebars", user: usern
     })
   });
 });
@@ -420,7 +419,7 @@ app.get('/transportation_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('transportationDetaila', {
-      Venues: Venues, layout: "maina.handlebars", user: x
+      Venues: Venues, layout: "maina.handlebars", user: usern
     })
   });
 });
@@ -436,7 +435,7 @@ app.get('/services_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('servicesDetaila', {
-      Venues: Venues, layout: "maina.handlebars", user: x
+      Venues: Venues, layout: "maina.handlebars", user: usern
     })
   });
 });
@@ -516,7 +515,7 @@ app.get('/logout', function (req, res){
 });
 
 
-app.post('/review/:venueId', function(req, res) {
+app.post('/review/:venueId', isAuth, function(req, res) {
   Review.create({
     review: req.body.review,
     rating:req.body.rating,
