@@ -59,7 +59,6 @@ app.engine('handlebars', expressHandlebars({
 }));
 app.set('view engine', 'handlebars');
 
-
 var hbs = require('express-handlebars').create();
 
 hbs.getPartials().then(function (partials) {
@@ -83,26 +82,26 @@ var User = connection.define ('User',{
   },
   lname: Sequelize.STRING,
   fname: Sequelize.STRING
- });
+});
 
- var Venue = connection.define('Venue', {  
- name:  Sequelize.STRING,
- address: Sequelize.STRING,
- address2: Sequelize.STRING,
- phoneNumber:Sequelize.STRING,
- website:Sequelize.STRING,
- date: Sequelize.DATE,
- time: Sequelize.TIME
- 
- });
+var Venue = connection.define('Venue', {  
+  name:  Sequelize.STRING,
+  address: Sequelize.STRING,
+  address2: Sequelize.STRING,
+  phoneNumber:Sequelize.STRING,
+  website:Sequelize.STRING,
+  date: Sequelize.DATE,
+  time: Sequelize.TIME
 
- var Review = connection.define('Review', {
- review: Sequelize.TEXT,
- rating:{
-  type:Sequelize.INTEGER,
-   min: 1, 
-   max:5 
- }
+});
+
+var Review = connection.define('Review', {
+  review: Sequelize.TEXT,
+  rating:{
+    type:Sequelize.INTEGER,
+    min: 1, 
+    max:5 
+  }
 });
 
 
@@ -193,7 +192,7 @@ app.post("/register", function(req, res){
   console.log(req.body);
   User.findOne({where: {email: req.body.email}}).then(function(results) {
     if(results){
-      res.redirect("/?msg=Your email is already registered. Please login");}
+      res.redirect("/?msg=Your email is already registered, please login.");}
     else {
       User.create({
         username: req.body.username,
@@ -210,13 +209,13 @@ app.post("/register", function(req, res){
 
 
 app.get("/", function(req, res) {
-   res.render('index');
+  res.render('index', {msg: req.query.msg});
 });
 
 app.get("/auth", function(req, res){
- var x = req.user.username; 
- console.log(req); 
-   res.render('index', {layout: 'maina.handlebars', user: x});
+  var x = req.user.username; 
+  console.log(req); 
+  res.render('index',  {layout: 'maina.handlebars', user: x, msg: req.query.msg});
 });
 
 app.get("/events", function(req, res) {
@@ -300,8 +299,8 @@ app.get('/averages', function(req,res) {
     res.render('test', {
       TestRat : TestRat
     })
-});
   });
+});
 
 app.get('/events/:p', function(req,res) {
   var x = req.params.p;
@@ -350,11 +349,10 @@ app.get('/transportation/:p', function(req,res) {
   });
 });
 
-
 app.post('/login',
     passport.authenticate('local', {
-      successRedirect: '/auth?msg=login successful',
-      failureRedirect: '/?msg=login unsuccessful, please check your email and password or if you haven\'t done so, please register'
+      successRedirect: '/auth?msg=Login successful.',
+      failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
     }));
 //
 //logout
@@ -369,9 +367,9 @@ app.get('/logout', function (req, res){
 
 
 app.post('/review/:venueId', function(req, res) {
-Review.create({
-review: req.body.review,
-rating:req.body.rating,
+  Review.create({
+    review: req.body.review,
+    rating:req.body.rating,
     VenueId: req.params.venueId
   }).then(function() {
     res.redirect('back');
