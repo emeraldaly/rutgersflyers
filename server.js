@@ -125,7 +125,7 @@ function yelpFunc(var1, var2) {
     console.error(err);
   });
 }
-yelpFunc("restaurants", "new brunswick");
+//yelpFunc("restaurants", "new brunswick");
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
   passReqToCallback: true,
@@ -220,6 +220,7 @@ app.get("/", function(req, res){
       ['createdAt', 'DESC']
     ]
   }).then(function(Reviews) {
+    debugger;
       res.render('sortByNewest', {msg: req.query.msg,
         Reviews : Reviews
       })
@@ -256,6 +257,7 @@ app.get("/events", function(req, res) {
   });
 });
 
+
 app.get("/services", function(req, res) {
   Venue.findAll({
     where: {
@@ -286,6 +288,20 @@ app.get('/transportation', function(req, res) {
 });
 
 
+app.get('/food_a', isAuth, function(req,res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 1},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('food', {
+      Venues: Venues, layout: "maina.handlebars"
+    })
+  });
+});
+
 app.get('/food', function(req,res) {
   Venue.findAll({
     where: {
@@ -294,12 +310,14 @@ app.get('/food', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
-    debugger
     res.render('food', {
       Venues: Venues
     })
   });
 });
+
+
+
 
 app.get('/food/:p', function(req,res) {
   var x = req.params.p;

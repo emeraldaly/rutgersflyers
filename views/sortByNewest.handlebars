@@ -25,10 +25,11 @@
 {{#each Reviews}}
 
    
-        <a class="title" href="/food/{{this.VenueId}}"><h4>     {{this.dataValues.Venue.name}}</h4></a>
+        <a class="title" href="/food/{{this.VenueId}}"><h4>
+            {{this.Venue.dataValues.name}}</h4></a>
                <p>
       
-               {{this.review}}...<span
+               {{this.dataValues.review}}...<span
            class="rating">Rating: </span>{{this.rating}}
          <p> 
 {{/each}}

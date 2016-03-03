@@ -26,12 +26,8 @@
        {{#each Venues}}
         <a class="title" href="/food/{{this.id}}"><h4>     {{this.name}}</h4></a>
                <p>
-              <span
-
-                         class="rating">Rating:
-              </span>
-              
-              {{this.dataValues.Reviews.dataValues}}
+               {{this.dataValues.Reviews.[0].review}}</p>
+               <p> Rating:              {{this.dataValues.Reviews.[0].rating}}
               <p> {{/each}}
           <br />
         </div>
