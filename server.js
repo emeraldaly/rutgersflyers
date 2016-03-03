@@ -63,7 +63,6 @@ app.set('view engine', 'handlebars');
 var hbs = require('express-handlebars').create();
  
 hbs.getPartials().then(function (partials) {
-    console.log(partials);
     });
 
 var User = connection.define ('User',{
@@ -110,6 +109,7 @@ var User = connection.define ('User',{
  });
   Category.hasMany(Venue);
  Venue.hasMany(Review);
+ Review.belongsTo(Venue);
 
 function yelpFunc(var1, var2) {
 
@@ -369,6 +369,38 @@ rating:req.body.rating,
     res.redirect('back');
   });
 });
+
+app.get("/newest", function(req, res){
+Review.findAll({
+
+   include: [
+      {model:Venue}
+    ],
+     order: [
+//     // Will escape username and validate DESC against a list of valid direction parameters
+    ['createdAt', 'DESC']
+    ]
+  }).then(function(Reviews) {
+    console.dir(Reviews)
+    debugger
+    res.render('sortByNewest', {
+      Reviews : Reviews
+    })
+  })
+})
+
+
+//  Review.findAll({
+//      order: [
+//     // Will escape username and validate DESC against a list of valid direction parameters
+//     ['createdAt', 'DESC']
+//   ]
+//   }).then(function(Review) {
+//     res.render('sortByNewest', {
+//       Review : Review
+//     })
+//   })
+// })
 connection.sync();
 
 // User.bulkCreate([
@@ -387,8 +419,7 @@ connection.sync();
 // Venue.bulkCreate([
 // { name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
 // { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
-
-//]);
+// ]);
 
 // Category.bulkCreate([
 //    { category: 'Food' },
