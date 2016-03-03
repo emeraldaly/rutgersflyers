@@ -181,6 +181,8 @@ app.get('/register', function(req, res) {
 });
 
 
+
+
 app.post("/venuesCreate", isAuth, function(req, res) {
   Venue.create({
     name:req.body.name,
@@ -193,7 +195,7 @@ app.post("/venuesCreate", isAuth, function(req, res) {
 
     CategoryId:req.body.CategoryId
   }).then(function() {
-    res.redirect('/');
+    res.redirect('/auth?msg=Venue created.');
   })
 });
 
