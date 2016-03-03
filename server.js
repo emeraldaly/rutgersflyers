@@ -103,8 +103,8 @@ var User = connection.define ('User',{
    min: 1, 
    max:5 
  }
-
 });
+
 
 var Category = connection.define('Category', {
   category: Sequelize.STRING
