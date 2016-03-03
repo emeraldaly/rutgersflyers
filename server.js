@@ -364,8 +364,6 @@ app.get('/logout', function (req, res){
 });
 
 
-
-
 app.post('/review/:venueId', function(req, res) {
   Review.create({
     review: req.body.review,
