@@ -1,13 +1,13 @@
-<body>
-  <div class="container">
+
+    <div class="container">
     <div class="row">
       <div class="col-md-3">
         <!-- Nav tabs -->
         <ul class="nav icons nav-tabs">
-          <li><a href="/food">Food<div><img src="/img/spotfood.png" class="img1"></div></a></li>
+          <li class="active"><a href="/food">Food<div><img src="/img/spotfood.png" class="img1"></div></a></li>
           <li><a href="/events" 
-                                >Events<div class="active"> <img
-                                src="/img/spotcalendar.png" class="img1"></div></a></li>
+                 >Events<div> <img
+                 src="/img/spotcalendar.png" class="img1"></div></a></li>
           <li><a href="/transportation"
                  >Transportation<div> <img
                  src="/img/spottransportation.png" class="img1"> </div> </a></li>
@@ -16,21 +16,23 @@
                  src="/img/spotservices.png" class="img1"></div> </a></li>
         </ul>  
       </div>
-     <div class="venuename col-md-6">
+      <div class="venuename col-md-6">
        <span class="msg"> {{msg}}</span>
         <h4>WhereRU Most Recent</h4>
         <br>
-        {{#each Venues}}
-             <a class="title" href="/events/{{this.id}}"><h4>     {{this.name}}</h4></a>
-               <p>
-               {{#each Reviews}}
 
+
+{{#each Reviews}}
+
+   
+        <a class="title" href="/food/{{this.VenueId}}"><h4>     {{this.dataValues.Venue.name}}</h4></a>
+               <p>
+      
                {{this.review}}...<span
            class="rating">Rating: </span>{{this.rating}}
-         <p> {{/each}}
+         <p> 
 {{/each}}
           <br />
         </div>
       </div> 
     </div>
-</body>

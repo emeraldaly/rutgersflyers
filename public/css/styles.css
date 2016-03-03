@@ -7,8 +7,6 @@
 a.hello{
  font-size: 120%;
 color: #df665b;
-
-
 }
 a.linklogo {
   color: white;
@@ -74,5 +72,6 @@ color: #df665b;
 .ratingInput{
   width: 10.0em;
 }
-
-
+.msg{
+  color: #df665b;
+}

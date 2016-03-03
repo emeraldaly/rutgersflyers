@@ -59,12 +59,13 @@ app.engine('handlebars', expressHandlebars({
 }));
 app.set('view engine', 'handlebars');
 
-
 var hbs = require('express-handlebars').create();
 
 hbs.getPartials().then(function (partials) {
-  console.log(partials);
 });
+
+
+
 
 var User = connection.define ('User',{
   username : {
@@ -83,34 +84,36 @@ var User = connection.define ('User',{
   },
   lname: Sequelize.STRING,
   fname: Sequelize.STRING
- });
+});
 
- var Venue = connection.define('Venue', {  
- name:  Sequelize.STRING,
- address: Sequelize.STRING,
- address2: Sequelize.STRING,
- phoneNumber:Sequelize.STRING,
- website:Sequelize.STRING,
- date: Sequelize.DATE,
- time: Sequelize.TIME
- 
- });
-
- var Review = connection.define('Review', {
- review: Sequelize.TEXT,
- rating:{
-  type:Sequelize.INTEGER,
-   min: 1, 
-   max:5 
- }
+var Venue = connection.define('Venue', {  
+  name:  Sequelize.STRING,
+  address: Sequelize.STRING,
+  address2: Sequelize.STRING,
+  phoneNumber:Sequelize.STRING,
+  website:Sequelize.STRING,
+  date: Sequelize.DATE,
+  time: Sequelize.TIME
 
 });
+
+var Review = connection.define('Review', {
+  review: Sequelize.TEXT,
+  rating:{
+    type:Sequelize.INTEGER,
+    min: 1, 
+    max:5 
+  }
+});
+
 
 var Category = connection.define('Category', {
   category: Sequelize.STRING
 });
+
 Category.hasMany(Venue);
 Venue.hasMany(Review);
+Review.belongsTo(Venue);
 
 function yelpFunc(var1, var2) {
 
@@ -193,7 +196,7 @@ app.post("/register", function(req, res){
   console.log(req.body);
   User.findOne({where: {email: req.body.email}}).then(function(results) {
     if(results){
-      res.redirect("/?msg=Your email is already registered. Please login");}
+      res.redirect("/?msg=Your email is already registered, please login.");}
     else {
       User.create({
         username: req.body.username,
@@ -207,17 +210,39 @@ app.post("/register", function(req, res){
     }
   })
 });
-
-
-app.get("/", function(req, res) {
-   res.render('index');
-});
+app.get("/", function(req, res){
+  Review.findAll({
+    include: [
+    {model:Venue}
+    ],
+    order: [
+      //     // Will escape username and validate DESC against a list of valid direction parameters
+      ['createdAt', 'DESC']
+    ]
+  }).then(function(Reviews) {
+      res.render('sortByNewest', {msg: req.query.msg,
+        Reviews : Reviews
+      })
+  })
+})
 
 app.get("/auth", function(req, res){
- var x = req.user.username; 
- console.log(req); 
-   res.render('index', {layout: 'maina.handlebars', user: x});
-});
+  var x = req.user.username; 
+  Review.findAll({
+    include: [
+    {model:Venue}
+    ],
+    order: [
+      //     // Will escape username and validate DESC against a list of valid direction parameters
+      ['createdAt', 'DESC']
+    ]
+  }).then(function(Reviews) {
+    console.dir(Reviews)
+      res.render('sortByNewest', {layout: 'maina.handlebars', user: x, msg: req.query.msg, Reviews: Reviews});
+  })
+})
+
+
 
 app.get("/events", function(req, res) {
   Venue.findAll({
@@ -269,8 +294,9 @@ app.get('/food', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
+    debugger
     res.render('food', {
-      Venues : Venues
+      Venues: Venues
     })
   });
 });
@@ -300,8 +326,8 @@ app.get('/averages', function(req,res) {
     res.render('test', {
       TestRat : TestRat
     })
-});
   });
+});
 
 app.get('/events/:p', function(req,res) {
   var x = req.params.p;
@@ -350,11 +376,10 @@ app.get('/transportation/:p', function(req,res) {
   });
 });
 
-
 app.post('/login',
     passport.authenticate('local', {
-      successRedirect: '/auth?msg=login successful',
-      failureRedirect: '/?msg=login unsuccessful, please check your email and password or if you haven\'t done so, please register'
+      successRedirect: '/auth?msg=Login successful.',
+      failureRedirect: '/?msg=Login unsuccessful, please check your email and password or if you haven\'t done so, please register.'
     }));
 //
 //logout
@@ -366,19 +391,92 @@ app.get('/logout', function (req, res){
 });
 
 
-
-
 app.post('/review/:venueId', function(req, res) {
-Review.create({
-review: req.body.review,
-rating:req.body.rating,
+  Review.create({
+    review: req.body.review,
+    rating:req.body.rating,
     VenueId: req.params.venueId
   }).then(function() {
     res.redirect('back');
   });
 });
+
 connection.sync();
 
+
+
+
+ Venue.bulkCreate([
+ { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1 },
+ { name: 'RU Hungry', address: '159 College Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-2177', website: 'http://ruhungrynj.net/', CategoryId: 1 },
+ { name: 'Fritz\'s Restaurant', address: '115 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-543-0202', website: 'www.fritzsnb.com', CategoryId: 1 },
+ { name: 'Destination Dogs', address: '101 Paterson St.', address2: 'New Brunswick\, NJ 08901',phoneNumber:'732-993-1016', website: 'www.destinationdogs.com', CategoryId: 1},
+ { name: 'Inboston', address: '16 Condict St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-514-0765', website: 'www.inbostonchicken.com', CategoryId: 1 },
+ { name: 'Veganized', address: '9 Spring St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-342-7412', website: 'www.veganizedfoods.com', CategoryId: 1},
+ { name: 'Clydz', address: '55 Paterson St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-6521', website: 'www.clydz.com', CategoryId: 1},
+ { name: 'Esquina Latina Restaurant /& Lounge', address: '335 George St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-543-1630', website: 'www.esquinalatinarestaurant.com', CategoryId: 1},
+ { name: 'Diesel /& Duke', address: '1339 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-1001', website: 'www.dieselandduke.com', CategoryId: 1},
+ { name: 'Chapati House', address: '349 George St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-416-8787', website: 'chapatihousenj.com', CategoryId: 1},
+ { name: 'KBG Korean BBQ /& Grill', address: '6 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-626-5406', website: 'www.iwantkbg.com', CategoryId: 1},
+ { name: 'El Oaxaqueño Mexican Restaurant', address: '260 Drift St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-545-6869', website: 'eloaxaqueno.com', CategoryId: 1},
+ { name: 'Due Mari', address: '78 Albany St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-296-1600', website: 'duemarinj.com', CategoryId: 1},
+ { name: 'Efes Restaurant', address: '32 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-249-4100', website: 'www.efesgrill.com', CategoryId: 1},
+ { name: 'Sahara Restaurant', address: '165 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-3020', website: 'www.saharacafenj.com', CategoryId: 1},
+ { name: 'Dashen Ethiopian Cuisine', address: '88 Albany St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-249-0494', website: 'www.destaethiopiannj.com', CategoryId: 1},
+ { name: 'The Dillinger Room', address: '338 George St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-214-0223', website: 'thedillingerroom.com', CategoryId: 1},
+ { name: 'Steakhouse 85', address: '85 Church St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-247-8585', website: 'www.steakhouse85.com', CategoryId: 1},
+ { name: 'My Way Korean Restaurant', address: '351 George St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-545-5757', website: 'www.mywaynj.com', CategoryId: 1},
+ { name: 'Mamoun\'s Falafel Restaurant', address: '58 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-640-0794', website: 'mamouns.com', CategoryId: 1},
+ { name: 'Stuff Yer Face', address: '49 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-247-1727', website: 'www.stuffyerface.com', CategoryId: 1},
+ { name: 'Thomas Sweet Ice Cream', address: '55 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-828-3855', website: 'www.thomassweet.com', CategoryId: 1},
+ { name: 'Thai Noodle', address: '174 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-247-6938', website: 'www.allmenus.com', CategoryId: 1},
+ { name: 'Eastonthai Kitchen', address: '144 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-253-7722', website: 'www.scarletmenus.com', CategoryId: 1},
+ { name: 'Nirvani\s Indian Kitchen', address: '56 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-253-0507', website: 'www.nirvaniskitchen.com', CategoryId: 1},
+ { name: 'Old Man Rafferty\'s', address: '106 Albany St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-6153', website: 'www.oldmanraffertys.com', CategoryId: 1},
+ { name: 'Hidden Grounds', address: '4C Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-317-4117', website: 'www.thehiddengrounds.com', CategoryId: 1},
+ { name: 'NJ Transit', address: 'French /& Albany Sts.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '(973) 275-5555', website: 'http://www.njtransit.com/', CategoryId: 2 },      
+ { name: 'NJ Bus Station', address: '750 Somerset St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-249-1100', website: 'http://www.coachusa.com/', CategoryId: 2 },    
+ { name: 'Newark Airport', address: '3 Brewster Rd.', address2: 'Newark\, NJ 07114', phoneNumber: '973-961-6000', website: 'http://www.panynj.gov/airports/newark-liberty.html', CategoryId: 2 },    
+ { name: 'JFK Airport', address: 'JFK Airport', address2: 'New York\, NY 11430', phoneNumber: '718-244-4444', website: 'http://www.panynj.gov/airports/jfk.html', CategoryId: 2 },   
+ { name: 'LaGuardia Airport', address: 'LaGuardia Airport', address2: 'New York\, NY 11371', phoneNumber: '718-533-3400', website: 'http://www.panynj.gov/airports/laguardia.html', CategoryId: 2 },    
+ { name: 'RU NextBus', address: '55 Commercial Avenue', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-932-7744', website: 'http://rudots.rutgers.edu/campusbuses.shtml', CategoryId: 2 },  
+ { name: 'The Knight Mover', address: '55 Commercial Avenue', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-932-7433', website: 'http://rudots.rutgers.edu/campusbuses.shtml', CategoryId: 2 },  
+ { name: 'New BrunsQuick Shuttles', address: '55 Commercial Avenue', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-932-7744', website: 'http://rudots.rutgers.edu/campusbuses.shtml', CategoryId: 2 }, 
+ { name: 'Uber', address: 'NA', address2: 'NA', phoneNumber: 'NA', website: 'www.uber.com', CategoryId: 2 },  
+ { name: 'Library Shuttle', address: '55 Commercial Avenue', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-932-7744', website: 'http://rudots.rutgers.edu/campusbuses.shtml', CategoryId: 2 },   
+ { name: 'All Brunswick Taxi', address: '139 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-545-0900', website: 'http://www.yelp.com/biz/all-brunswick-taxi-new-brunswick', CategoryId: 2 }, 
+ { name: 'Yellow Cab of New Brunswick', address: 'NA', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-2222', website: 'http://www.yellowcabnewbrunswick.com/', CategoryId: 2 }, 
+ { name: 'ALLO Taxi', address: 'NA', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-214-1111', website: 'www.allotaxi.com', CategoryId: 2 }, 
+ { name: 'SEPTA', address: '1234 Market Street.', address2: 'Philadelphia\, PA 19107', phoneNumber: '(215) 580-7800', website: 'http://www.septa.org/', CategoryId: 2 },  
+ { name: 'PATH', address: 'NA', address2: 'NA', phoneNumber: '800-234-7284', website: 'http://www.panynj.gov/path/', CategoryId: 2 },
+ { name: 'Key Foods', address: '95 Paterson St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-317-0590', website: 'http://www.keyfoodnewbrunswick.com/', CategoryId: 3 },
+ { name: 'Robert Wood Johnson Fitness /& Wellness Center', address: '100 Kirkpatrick St., Suite 201', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-873-1222', website: 'http://rwjfitnesswellness.com/', CategoryId: 3 },
+ { name: 'George Street Co-Op', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 3 },
+ { name: 'New Brunswick Post Office', address: '86 Bayard St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-545-6819', website: 'www.usps.com', CategoryId: 3 },
+ { name: 'Saint Peter\'s University Hospital', address: '254 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-745-8600', website: 'www.saintpetershcs.com', CategoryId: 3 },
+ { name: 'Robert Wood Johnson University Hospital', address: '1 Robert Wood Johnson Pl.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-828-3000', website: 'www.rwjuh.edu', CategoryId: 3 },
+ { name: 'Sparks Hair Design', address: '72 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-828-1414', website: 'http://www.sparkshairdesign.com/', CategoryId: 3 },
+ { name: 'Moda Hair Salon', address: '16 Easton Ave.', address2: 'New Brunswick/, NJ 08901', phoneNumber: '732-249-3636', website: 'http://modasalonnj.com/', CategoryId: 3 },
+ { name: 'State Theater', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 3 },
+// { name: 'Organic Open Mic at the Cafe', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 3/, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+ //{ name: 'Organic Open Mic at the Cafe', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 10, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+ //{ name: 'International Women\'s Day', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 8, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+// { name: 'The Positive Potluck', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 11, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+// { name: 'Cult of Lunacy comedy show', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 12, 2016', time: '7:00 pm', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+// { name: 'Lovey Williams: One Man Band', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 5, 2016', time: ' 10 am /& 12 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+// { name: 'Vienna Mozart Orchestra', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 5, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+// { name: 'Galumpha', address: 'Cross Roads Theatre', address2: 'New Brunswick\, NJ 08901', date: 'March 6, 2016', time: '2 pm /& 5 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+// { name: 'Howie Mandel', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 10, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+// { name: 'The Chieftains', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 11, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+// { name: 'Bobby Bandiera\'s Tribute to Bruce Springstein/, Bon Jovia/, Southside Johnny/, and Others', address: '15 Livingston Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 12, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 } 
+ ]);
+//Category.bulkCreate([
+ //   { category: 'Food' },
+  //  { category: 'Transportation' },
+  //  { category: 'Services'},
+  //  { category: 'Events' }
+
+//]);
 
 
 //database connection
