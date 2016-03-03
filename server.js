@@ -185,8 +185,12 @@ app.post("/venuesCreate", isAuth, function(req, res) {
   Venue.create({
     name:req.body.name,
     address:req.body.address,
+    address2:req.body.address2,
+    date:req.body.date,
+    time:req.body.time,
     phoneNumber:req.body.phoneNumber,
     website:req.body.website,
+
     CategoryId:req.body.CategoryId
   }).then(function() {
     res.redirect('/');
