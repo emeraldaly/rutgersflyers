@@ -109,16 +109,13 @@ var Review = connection.define('Review', {
 
 var Category = connection.define('Category', {
   category: Sequelize.STRING
-<<<<<<< HEAD
+
  });
   Category.hasMany(Venue);
  Venue.hasMany(Review);
  Review.belongsTo(Venue);
-=======
-});
-Category.hasMany(Venue);
-Venue.hasMany(Review);
->>>>>>> d806949af322aaaa4703627c77dac41f29c303e0
+
+
 
 function yelpFunc(var1, var2) {
 
