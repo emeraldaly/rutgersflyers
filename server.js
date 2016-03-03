@@ -358,18 +358,14 @@ app.get('/food', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
-    res.render('food', {
+  res.render('food', {
       Venues: Venues
     })
   });
 });
 
-
-
-
 app.get('/food/:p', function(req,res) {
   var x = req.params.p;
-  console.log(x);
   Venue.findAll({
     where: {
       "id" : x},
@@ -377,6 +373,11 @@ app.get('/food/:p', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
+    var vname = Venues.name;
+    console.log(vname);
+    var quotedvname = '"' + vname + '"';
+    var yname = yelpFunc(quotedvname, "New Brunswick");
+     console.log(Venues);
     res.render('foodDetail', {
       Venues: Venues
     })
@@ -461,7 +462,6 @@ app.get('/averages', function(req,res) {
 
 app.get('/events/:p', function(req,res) {
   var x = req.params.p;
-
   console.log(x);
   Venue.findAll({
     where: {
@@ -470,6 +470,11 @@ app.get('/events/:p', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
+    var vname = Venues[0].name;
+    console.log(vname);
+    var quotedvname = '"' + vname + '"';
+    var yname = yelpFunc(vname, "New Brunswick");
+    console.log(yname);
     res.render('eventsDetail', {
       Venues : Venues
     })
@@ -532,9 +537,7 @@ app.post('/review/:venueId', isAuth, function(req, res) {
 });
 
 connection.sync();
-
-
-
+/*
  Venue.bulkCreate([
  { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1 },
  { name: 'RU Hungry', address: '159 College Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-2177', website: 'http://ruhungrynj.net/', CategoryId: 1 },
@@ -587,25 +590,25 @@ connection.sync();
  { name: 'Sparks Hair Design', address: '72 Easton Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-828-1414', website: 'http://www.sparkshairdesign.com/', CategoryId: 3 },
  { name: 'Moda Hair Salon', address: '16 Easton Ave.', address2: 'New Brunswick/, NJ 08901', phoneNumber: '732-249-3636', website: 'http://modasalonnj.com/', CategoryId: 3 },
  { name: 'State Theater', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 3 },
-// { name: 'Organic Open Mic at the Cafe', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 3/, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
- //{ name: 'Organic Open Mic at the Cafe', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 10, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
- //{ name: 'International Women\'s Day', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 8, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
-// { name: 'The Positive Potluck', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 11, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
-// { name: 'Cult of Lunacy comedy show', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 12, 2016', time: '7:00 pm', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
-// { name: 'Lovey Williams: One Man Band', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 5, 2016', time: ' 10 am /& 12 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
-// { name: 'Vienna Mozart Orchestra', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 5, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
-// { name: 'Galumpha', address: 'Cross Roads Theatre', address2: 'New Brunswick\, NJ 08901', date: 'March 6, 2016', time: '2 pm /& 5 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
-// { name: 'Howie Mandel', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 10, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
-// { name: 'The Chieftains', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 11, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
-// { name: 'Bobby Bandiera\'s Tribute to Bruce Springstein/, Bon Jovia/, Southside Johnny/, and Others', address: '15 Livingston Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 12, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 } 
- ]);
+ { name: 'Organic Open Mic at the Cafe', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 3/, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+{ name: 'Organic Open Mic at the Cafe', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 10, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+ { name: 'International Women\'s Day', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 8, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+ { name: 'The Positive Potluck', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 11, 2016', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+ { name: 'Cult of Lunacy comedy show', address: '89 Morris St.', address2: 'New Brunswick\, NJ 08901', date: 'March 12, 2016', time: '7:00 pm', phoneNumber: '732-247-8280', website: 'http://georgestreetcoop.com/', CategoryId: 4 },
+ { name: 'Lovey Williams: One Man Band', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 5, 2016', time: ' 10 am /& 12 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+ { name: 'Vienna Mozart Orchestra', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 5, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+ { name: 'Galumpha', address: 'Cross Roads Theatre', address2: 'New Brunswick\, NJ 08901', date: 'March 6, 2016', time: '2 pm /& 5 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+ { name: 'Howie Mandel', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 10, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+ { name: 'The Chieftains', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 11, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 },
+ { name: 'Bobby Bandiera\'s Tribute to Bruce Springstein/, Bon Jovia/, Southside Johnny/, and Others', address: '15 Livingston Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 12, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 } 
+ ]);     */
 //Category.bulkCreate([
- //   { category: 'Food' },
+  //  { category: 'Food' },
   //  { category: 'Transportation' },
   //  { category: 'Services'},
-  //  { category: 'Events' }
+   // { category: 'Events' }
 
-//]);
+//]);  
 
 //database connection
 app.listen(PORT, function() {
