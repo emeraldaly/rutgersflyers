@@ -67,6 +67,8 @@ color: #df665b;
 
 .reviewForm{
  display: none;
+ border:white 1px solid;
+ padding:5px;
 }
 
 .ratingInput{
@@ -74,4 +76,8 @@ color: #df665b;
 }
 .msg{
   color: #df665b;
+}
+
+textarea {
+    resize: none;
 }
