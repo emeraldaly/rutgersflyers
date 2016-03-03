@@ -380,6 +380,7 @@ rating:req.body.rating,
 connection.sync();
 
 
+
 //database connection
 app.listen(PORT, function() {
   console.log("Listening on:" + PORT)
