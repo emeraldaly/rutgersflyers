@@ -4,8 +4,8 @@ var app = express();
 var PORT = process.env.PORT || 9000;
 var expressHandlebars = require('express-handlebars');
 //code below is for used for partials
-
-
+//for username
+var x;
 //passport
 var passport = require('passport');
 var session = require('express-session');
@@ -165,7 +165,7 @@ function saltyhash(pass) {
 function isAuth(req, res, next) {
   if(req.isAuthenticated()){
     return next();}
-  res.redirect("/?no_authorization");
+  res.redirect("/msg?no_authorization");
 }
 
 //ROUTES
@@ -228,7 +228,7 @@ app.get("/", function(req, res){
 })
 
 app.get("/auth", function(req, res){
-  var x = req.user.username; 
+  x = req.user.username; 
   Review.findAll({
     include: [
     {model:Venue}
@@ -239,7 +239,7 @@ app.get("/auth", function(req, res){
     ]
   }).then(function(Reviews) {
     console.dir(Reviews)
-      res.render('sortByNewest', {layout: 'maina.handlebars', user: x, msg: req.query.msg, Reviews: Reviews});
+      res.render('sortByNewest_a', {layout: 'maina.handlebars', user: x, msg: req.query.msg, Reviews: Reviews});
   })
 })
 
@@ -287,6 +287,19 @@ app.get('/transportation', function(req, res) {
   });
 });
 
+app.get('/services_a', isAuth, function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 3},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues){
+    res.render("servicesa",{
+      Venues: Venues, layout: "maina.handlebars", user: x
+    })
+  });
+});
 
 app.get('/food_a', isAuth, function(req,res) {
   Venue.findAll({
@@ -296,8 +309,37 @@ app.get('/food_a', isAuth, function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
-    res.render('food', {
-      Venues: Venues, layout: "maina.handlebars"
+    res.render('fooda', {
+      Venues: Venues, layout: "maina.handlebars", user: x
+    })
+  });
+});
+
+app.get('/transportation_a', isAuth, function(req,res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 2},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('transportationa', {
+      Venues: Venues, layout: "maina.handlebars", user: x
+    })
+  });
+});
+
+
+app.get('/events_a', isAuth, function(req,res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 4},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('eventsa', {
+      Venues: Venues, layout: "maina.handlebars", user: x
     })
   });
 });

@@ -1,0 +1,35 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Nav tabs -->
+        <ul class="nav icons nav-tabs">
+          <li><a href="/food_a">Food<div><img src="/img/spotfood.png" class="img1"></div></a></li>
+          <li><a href="/events_a" 
+                                >Events<div class="active"> <img
+                                src="/img/spotcalendar.png" class="img1"></div></a></li>
+          <li class="active"><a href="/transportation_a"
+                 >Transportation<div> <img
+                 src="/img/spottransportation.png" class="img1"> </div> </a></li>
+          <li><a href="/services_a" 
+                 >Services<div><img
+                 src="/img/spotservices.png" class="img1"></div> </a></li>
+        </ul>  
+      </div>
+       <div class="venuename col-md-6">
+        <h4>Transportation</h4>
+        <br>
+
+
+       {{#each Venues}}
+        <a class="title" href="/transportation_a/{{this.id}}"><h4>     {{this.name}}</h4></a>
+               <p>
+               {{this.dataValues.Reviews.[0].review}}</p>
+               <p> Rating:              {{this.dataValues.Reviews.[0].rating}}
+              <p> {{/each}}
+          <br />
+        </div>
+      </div> 
+    </div>
+
+</body>
