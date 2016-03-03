@@ -4,8 +4,8 @@ var app = express();
 var PORT = process.env.PORT || 9000;
 var expressHandlebars = require('express-handlebars');
 //code below is for used for partials
-
-
+//for username
+var usern;
 //passport
 var passport = require('passport');
 var session = require('express-session');
@@ -92,8 +92,8 @@ var Venue = connection.define('Venue', {
   address2: Sequelize.STRING,
   phoneNumber:Sequelize.STRING,
   website:Sequelize.STRING,
-  date: Sequelize.DATE,
-  time: Sequelize.TIME
+  date: Sequelize.STRING,
+  time: Sequelize.STRING
 
 });
 
@@ -109,11 +109,12 @@ var Review = connection.define('Review', {
 
 var Category = connection.define('Category', {
   category: Sequelize.STRING
-});
+ });
 
 Category.hasMany(Venue);
 Venue.hasMany(Review);
 Review.belongsTo(Venue);
+
 
 function yelpFunc(var1, var2) {
 
@@ -125,7 +126,7 @@ function yelpFunc(var1, var2) {
     console.error(err);
   });
 }
-yelpFunc("restaurants", "new brunswick");
+//yelpFunc("restaurants", "new brunswick");
 //passport definition and bcrypt check
 passport.use('local', new LocalStrategy({
   passReqToCallback: true,
@@ -165,7 +166,7 @@ function saltyhash(pass) {
 function isAuth(req, res, next) {
   if(req.isAuthenticated()){
     return next();}
-  res.redirect("/?no_authorization");
+  res.redirect("/msg?no_authorization");
 }
 
 //ROUTES
@@ -180,15 +181,21 @@ app.get('/register', function(req, res) {
 });
 
 
+
+
 app.post("/venuesCreate", isAuth, function(req, res) {
   Venue.create({
     name:req.body.name,
     address:req.body.address,
+    address2:req.body.address2,
+    date:req.body.date,
+    time:req.body.time,
     phoneNumber:req.body.phoneNumber,
     website:req.body.website,
+
     CategoryId:req.body.CategoryId
   }).then(function() {
-    res.redirect('/');
+    res.redirect('/auth?msg=Venue created.');
   })
 });
 
@@ -227,7 +234,7 @@ app.get("/", function(req, res){
 })
 
 app.get("/auth", function(req, res){
-  var x = req.user.username; 
+  usern = req.user.username; 
   Review.findAll({
     include: [
     {model:Venue}
@@ -238,7 +245,7 @@ app.get("/auth", function(req, res){
     ]
   }).then(function(Reviews) {
     console.dir(Reviews)
-      res.render('sortByNewest', {layout: 'maina.handlebars', user: x, msg: req.query.msg, Reviews: Reviews});
+      res.render('sortByNewest_a', {layout: 'maina.handlebars', user: usern, msg: req.query.msg, Reviews: Reviews});
   })
 })
 
@@ -255,6 +262,7 @@ app.get("/events", function(req, res) {
     res.render("events", {Venues: Venues})
   });
 });
+
 
 app.get("/services", function(req, res) {
   Venue.findAll({
@@ -285,6 +293,62 @@ app.get('/transportation', function(req, res) {
   });
 });
 
+app.get('/services_a', isAuth, function(req, res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 3},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues){
+    res.render("servicesa",{
+      Venues: Venues, layout: "maina.handlebars", user: usern
+    })
+  });
+});
+
+app.get('/food_a', isAuth, function(req,res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 1},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('fooda', {
+      Venues: Venues, layout: "maina.handlebars", user: usern
+    })
+  });
+});
+
+app.get('/transportation_a', isAuth, function(req,res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 2},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('transportationa', {
+      Venues: Venues, layout: "maina.handlebars", user: usern
+    })
+  });
+});
+
+
+app.get('/events_a', isAuth, function(req,res) {
+  Venue.findAll({
+    where: {
+      CategoryId: 4},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('eventsa', {
+      Venues: Venues, layout: "maina.handlebars", user: usern
+    })
+  });
+});
 
 app.get('/food', function(req,res) {
   Venue.findAll({
@@ -294,12 +358,14 @@ app.get('/food', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
-    debugger
     res.render('food', {
       Venues: Venues
     })
   });
 });
+
+
+
 
 app.get('/food/:p', function(req,res) {
   var x = req.params.p;
@@ -316,6 +382,70 @@ app.get('/food/:p', function(req,res) {
     })
   });
 });
+
+app.get('/food_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('foodDetaila', {
+      Venues: Venues, layout:"maina.handlebars", user: usern  
+    })
+  });
+});
+
+app.get('/events_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('eventsDetaila', {
+      Venues: Venues, layout: "maina.handlebars", user: usern
+    })
+  });
+});
+app.get('/transportation_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('transportationDetaila', {
+      Venues: Venues, layout: "maina.handlebars", user: usern
+    })
+  });
+});
+
+app.get('/services_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('servicesDetaila', {
+      Venues: Venues, layout: "maina.handlebars", user: usern
+    })
+  });
+});
+
 
 app.get('/averages', function(req,res) {
 

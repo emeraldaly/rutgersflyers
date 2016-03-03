@@ -15,12 +15,6 @@
                <p>{{this.review}}
                <p>Rating: {{this.rating}}
                {{/each}}
-              <form class="reviewForm"method="POST" action="/review/{{ id }}">
-              <input type="text" class="form-control"  placeholder="review" name="review">
-              <input type="text" class="form-control" placeholder="rating" name="rating">
-              <button type="submit" class="btn btn-default dataButton">submit review</button>
-            </form>
-            <button class="createReview btn btn-default">write a review </button>
        {{/each}}     
                
                <br />

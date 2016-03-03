@@ -19,19 +19,19 @@
        <div class="venuename col-md-6">
         <h4>Services</h4>
         <br>
-        {{#each Venues}}
+
+
+       {{#each Venues}}
         <a class="title" href="/services/{{this.id}}"><h4>     {{this.name}}</h4></a>
                <p>
-               {{#each Reviews}}
-
-               {{this.review}}...<span
-           class="rating">Rating: </span>{{this.rating}}
-         <p> {{/each}}
-{{/each}}
+               {{this.dataValues.Reviews.[0].review}}</p>
+               <p> Rating:              {{this.dataValues.Reviews.[0].rating}}
+              <p> {{/each}}
           <br />
         </div>
       </div> 
     </div>
+
 
 
 
