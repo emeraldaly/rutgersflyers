@@ -185,12 +185,8 @@ app.post("/venuesCreate", isAuth, function(req, res) {
   Venue.create({
     name:req.body.name,
     address:req.body.address,
-    address2:req.body.address2,
-    date:req.body.date,
-    time:req.body.time,
     phoneNumber:req.body.phoneNumber,
     website:req.body.website,
-
     CategoryId:req.body.CategoryId
   }).then(function() {
     res.redirect('/');
@@ -393,7 +389,7 @@ app.get('/food_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('foodDetaila', {
-      Venues: Venues
+      Venues: Venues, layout:"maina.handlebars", user:x
     })
   });
 });
@@ -409,7 +405,7 @@ app.get('/events_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('eventsDetaila', {
-      Venues: Venues
+      Venues: Venues, layout: "maina.handlebars", user: x
     })
   });
 });
@@ -424,7 +420,7 @@ app.get('/transportation_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('transportationDetaila', {
-      Venues: Venues, layout: "maina.handlebars"
+      Venues: Venues, layout: "maina.handlebars", user: x
     })
   });
 });
@@ -440,7 +436,7 @@ app.get('/services_a/:p', isAuth, function(req,res) {
       ]
   }).then(function(Venues) {
     res.render('servicesDetaila', {
-      Venues: Venues
+      Venues: Venues, layout: "maina.handlebars", user: x
     })
   });
 });
