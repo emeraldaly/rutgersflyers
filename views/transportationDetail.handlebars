@@ -16,16 +16,19 @@
                <p>Rating: {{this.rating}}
                {{/each}}
                <form class="reviewForm"method="POST" action="/review/{{ id }}">
-              <input type="text" class="form-control"  placeholder="review" name="review">
+               <h4>Review: </h4>
+               <textarea rows="4" cols="50" type="text" class="form-control"  placeholder="review" name=""> </textarea>
+              <h4>Rating: </h4>
               <div class="form-group">
-            <label class="checkbox-inline"><input type="radio" name="test" value="stud">Student</label>
-          <label class="checkbox-inline"><input type="radio" name="test"
-            value="teacher">Teacher</label>
-          <label class="checkbox-inline"><input type="radio" name="test" value="ta">TA</label>
-                        </div>
-                        
-
-              <button type="submit" class="btn btn-default dataButton">submit review</button>
+            <label class="checkbox-inline"><input type="radio" name="rating" value="1"> 1</label>
+          <label class="checkbox-inline"><input type="radio" name="rating"
+            value="2"> 2</label>
+          <label class="checkbox-inline"><input type="radio" name="rating" value="3"> 3</label> 
+          <label class="checkbox-inline"><input type="radio" name="rating" value="4"> 4</label> 
+          <label class="checkbox-inline"><input type="radio" name="rating" value="5"> 5</label>
+            </div>
+   
+              <button type="submit" class="btn btn-default dataButton">Submit</button>
             </form>
             <button class="createReview btn btn-default">write a review </button>
        {{/each}}     
