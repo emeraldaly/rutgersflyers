@@ -358,18 +358,14 @@ app.get('/food', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
-    res.render('food', {
+  res.render('food', {
       Venues: Venues
     })
   });
 });
 
-
-
-
 app.get('/food/:p', function(req,res) {
   var x = req.params.p;
-  console.log(x);
   Venue.findAll({
     where: {
       "id" : x},
@@ -377,6 +373,11 @@ app.get('/food/:p', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
+    var vname = Venues.name;
+    console.log(vname);
+    var quotedvname = '"' + vname + '"';
+    var yname = yelpFunc(quotedvname, "New Brunswick");
+     console.log(Venues);
     res.render('foodDetail', {
       Venues: Venues
     })
@@ -461,7 +462,6 @@ app.get('/averages', function(req,res) {
 
 app.get('/events/:p', function(req,res) {
   var x = req.params.p;
-
   console.log(x);
   Venue.findAll({
     where: {
@@ -470,6 +470,11 @@ app.get('/events/:p', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
+    var vname = Venues[0].name;
+    console.log(vname);
+    var quotedvname = '"' + vname + '"';
+    var yname = yelpFunc(vname, "New Brunswick");
+    console.log(yname);
     res.render('eventsDetail', {
       Venues : Venues
     })
@@ -532,6 +537,7 @@ app.post('/review/:venueId', function(req, res) {
 });
 
 connection.sync();
+<<<<<<< HEAD
 
 
 
@@ -600,12 +606,13 @@ connection.sync();
 // { name: 'The Chieftains', address: '15 Livingstonn Ave.', address2: 'New Brunswick\, NJ 08901', date: '2016-03-11', time: '20:00:00', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4, id: 560 },
 // { name: 'Bobby Bandiera\'s Tribute to Bruce Springstein/, Bon Jovia/, Southside Johnny/, and Others', address: '15 Livingston Ave.', address2: 'New Brunswick\, NJ 08901', date: '2016-03-12', time: '20:00:00', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4, id: 561 } 
 //  ]);
+
+
 //Category.bulkCreate([
- //   { category: 'Food' },
+  //  { category: 'Food' },
   //  { category: 'Transportation' },
   //  { category: 'Services'},
-  //  { category: 'Events' }
-
+   // { category: 'Events' }
 //]);
 //Food
 // Review.bulkCreate([
