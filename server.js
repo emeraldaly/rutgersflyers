@@ -378,6 +378,70 @@ app.get('/food/:p', function(req,res) {
   });
 });
 
+app.get('/food_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('foodDetaila', {
+      Venues: Venues
+    })
+  });
+});
+
+app.get('/events_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('eventsDetaila', {
+      Venues: Venues
+    })
+  });
+});
+app.get('/transportation_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('transportationDetaila', {
+      Venues: Venues, layout: "maina.handlebars"
+    })
+  });
+});
+
+app.get('/services_a/:p', isAuth, function(req,res) {
+  var x = req.params.p;
+  console.log(x);
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+  }).then(function(Venues) {
+    res.render('servicesDetaila', {
+      Venues: Venues
+    })
+  });
+});
+
+
 app.get('/averages', function(req,res) {
 
   Review.findAndCountAll({
