@@ -109,16 +109,11 @@ var Review = connection.define('Review', {
 
 var Category = connection.define('Category', {
   category: Sequelize.STRING
-<<<<<<< HEAD
- });
-  Category.hasMany(Venue);
- Venue.hasMany(Review);
- Review.belongsTo(Venue);
-=======
 });
+
 Category.hasMany(Venue);
 Venue.hasMany(Review);
->>>>>>> d806949af322aaaa4703627c77dac41f29c303e0
+Review.belongsTo(Venue);
 
 function yelpFunc(var1, var2) {
 
@@ -215,17 +210,39 @@ app.post("/register", function(req, res){
     }
   })
 });
-
-
-app.get("/", function(req, res) {
-  res.render('index', {msg: req.query.msg});
-});
+app.get("/", function(req, res){
+  Review.findAll({
+    include: [
+    {model:Venue}
+    ],
+    order: [
+      //     // Will escape username and validate DESC against a list of valid direction parameters
+      ['createdAt', 'DESC']
+    ]
+  }).then(function(Reviews) {
+      res.render('sortByNewest', {msg: req.query.msg,
+        Reviews : Reviews
+      })
+  })
+})
 
 app.get("/auth", function(req, res){
   var x = req.user.username; 
-  console.log(req); 
-  res.render('index',  {layout: 'maina.handlebars', user: x, msg: req.query.msg});
-});
+  Review.findAll({
+    include: [
+    {model:Venue}
+    ],
+    order: [
+      //     // Will escape username and validate DESC against a list of valid direction parameters
+      ['createdAt', 'DESC']
+    ]
+  }).then(function(Reviews) {
+    console.dir(Reviews)
+      res.render('sortByNewest', {layout: 'maina.handlebars', user: x, msg: req.query.msg, Reviews: Reviews});
+  })
+})
+
+
 
 app.get("/events", function(req, res) {
   Venue.findAll({
@@ -277,8 +294,9 @@ app.get('/food', function(req,res) {
       {model:Review}
       ]
   }).then(function(Venues) {
+    debugger
     res.render('food', {
-      Venues : Venues
+      Venues: Venues
     })
   });
 });
@@ -383,56 +401,25 @@ app.post('/review/:venueId', function(req, res) {
   });
 });
 
-app.get("/newest", function(req, res){
-Review.findAll({
-
-   include: [
-      {model:Venue}
-    ],
-     order: [
-//     // Will escape username and validate DESC against a list of valid direction parameters
-    ['createdAt', 'DESC']
-    ]
-  }).then(function(Reviews) {
-    console.dir(Reviews)
-    debugger
-    res.render('sortByNewest', {
-      Reviews : Reviews
-    })
-  })
-})
-
-
-//  Review.findAll({
-//      order: [
-//     // Will escape username and validate DESC against a list of valid direction parameters
-//     ['createdAt', 'DESC']
-//   ]
-//   }).then(function(Review) {
-//     res.render('sortByNewest', {
-//       Review : Review
-//     })
-//   })
-// })
 connection.sync();
 
 
-// Review.bulkCreate([
-//     {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
-//  ]);
+Review.bulkCreate([
+    {review: "Really the best restaurant place for those so inclined to such things.", rating: "5"}
+]);
 
-// Venue.bulkCreate([
-// { name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
-// { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
-// ]);
+Venue.bulkCreate([
+    { name: 'The Frog and the Peach', address: '29 Dennis St', phoneNumber: '(732)846-3216', website: 'frogandpeach.com' },
+    { name: 'RU Hungry', address: 'New Brunswick', phoneNumber: '(732)246-2177', website: 'http://ruhungrynj.net/' }
+]);
 
-// Category.bulkCreate([
-//    { category: 'Food' },
-//    { category: 'Transportation' },
-//    { category: 'Services'},
-//    { category: 'Events' }
+Category.bulkCreate([
+    { category: 'Food' },
+    { category: 'Transportation' },
+    { category: 'Services'},
+    { category: 'Events' }
 
-//    ]);
+]);
 
 //database connection
 app.listen(PORT, function() {
