@@ -85,6 +85,13 @@ textarea {
     resize: none;
 }
 
+.btn{
+  background:#df665b;
+}
+
+.btn:hover { 
+    background-color: #32A490;
+}
 /*.dropMenu {
     background: #5f6d7a;
    
