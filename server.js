@@ -379,14 +379,6 @@ Venue.findAll({
 //   });
 // });
 
-app.get('/food/:p', function(req,res) {
-  var x = req.params.p;
-  Venue.findAll({
-    where: {
-      "id" : x},
-      include: [
-      {model:Review}
-      ]
 
 app.post('/search', function(req,res) {
 var searchterm = "%" + req.body.search + "%";
