@@ -1,4 +1,15 @@
 
+  function validateReview(){
+    debugger;
+    var rating = $ ('input[name=rating]:checked').val()
+    var review = $("#review").val()
+     if (rating  == undefined || review == "" ){
+$(".validateReview").html("Please enter all fields")
+return false;
+  }
+}
+    
+
   function validateRegister() {
     debugger;
   var registerUsername  = $("#registerUsername ").val();
