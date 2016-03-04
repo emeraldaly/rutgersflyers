@@ -65,8 +65,6 @@ hbs.getPartials().then(function (partials) {
 });
 
 
-
-
 var User = connection.define ('User',{
   username : {
     type : Sequelize.STRING,
@@ -179,9 +177,6 @@ app.get('/register', function(req, res) {
     msg: req.query.msg
   });
 });
-
-
-
 
 app.post("/venuesCreate", isAuth, function(req, res) {
   Venue.create({
@@ -360,7 +355,7 @@ Venue.findAll({
         model: Review,
     }]
   }).then(function(Venues) {
- res.render('searcha', {
+ res.render('search_a', {
    Venues: Venues, layout: "maina", user: usern
     })
   });
