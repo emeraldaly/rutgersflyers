@@ -1,3 +1,0 @@
-authenticated---search, add venue, logout, hello " ":w
-
-unauthenticated--search, register, login
