@@ -244,13 +244,15 @@ app.get("/auth", function(req, res){
 })
 
 app.get("/test", function(req,res) {
-Review.findAll({
-attributes: ['rating', [connection.fn('count', connection.col('review.id')), 'count']]})
-  .then(function(Venues) {
+  Review.findAll({
+order: [[Sequelize.fn('max', Sequelize.col('rating'))]]
+  }).then(function(Venues) {
+    debugger;
  console.log(Venues);
 
   //   res.render("events", {Venues: Venues})
-  });
+
+});
 });
 
 app.get("/events", function(req, res) {
