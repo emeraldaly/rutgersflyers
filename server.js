@@ -537,10 +537,6 @@ app.post('/review/:venueId', function(req, res) {
 });
 
 connection.sync();
-<<<<<<< HEAD
-
-
-
 
 //  Venue.bulkCreate([
 //  { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1, id: 500 },
