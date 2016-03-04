@@ -63,24 +63,27 @@ class="imgbrandimg" src="/img/wrlogo.png"></a>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+        
           <ul class="dropdown-menu">
-           <form method="post" action="/login" id="login">
+            <div class="dropMenu">
+           <form method="post" onsubmit="return validateForm()" action="/login" id="login">
             <div class="form-group">
               <label for="emailaddy">Email Address:</label>
-              <input type="text" class="input-sm form-control loginInput" name="email">
+              <input type="text" id="loginEmail" class="input-sm form-control loginInput" name="email">
             </div>
             <div class="form-group">
               <label for="">Password:</label>
-              <input type="password" class="input-sm form-control loginInput" name="password">
+              <input type="password" id="loginPassword" class="input-sm form-control loginInput" name="password">
             </div>
 
-            <button type="submit" class="btn btn-block btn-default">Submit</button>
+            <button type="submit"  class="btn btn-block btn-danger">Submit</button>
           </form>
-           
-
+          <div class="pleaseEnter"> </div>
+             </div>
 
 
           </ul>
+
         </li>
       
         <li><a href="/register">Register</a></li>
@@ -95,5 +98,6 @@ class="imgbrandimg" src="/img/wrlogo.png"></a>
 {{> transportation }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/detailLink.js"></script>
    </body>
 </HTML>
