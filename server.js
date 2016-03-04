@@ -351,7 +351,9 @@ app.get('/events_a', isAuth, function(req,res) {
 
 app.post('/search_a', function(req,res) {
   var searchterma = '"%' + req.body.search + '%"';
-  connection.query('SELECT * FROM Venues where name like' +  searchterma, { model: Venue }).then(function(Venues){
+  connection.query('SELECT * FROM Venues where name like' +  searchterma, { model: Venue }, {tableName: 'Venue'
+}
+      ).then(function(Venues){
     res.render('searcha', {
       Venues: Venues, layout: "maina.handlebars", user: usern
 
