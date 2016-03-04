@@ -6,18 +6,19 @@
         <h4 class="modal-title">Events</h4>
       </div>
       <div class="modal-body">
-         <form action="/venuesCreate" method="POST" >
+         <form action="/venuesCreate" method="POST" onsubmit="return validateEvents()" >
         {{> venuesQuestions}}
         <div class="form-group">
               <label for="address">Date</label>
-              <input class="form-control" type="text" name="date" value="">
+              <input class="form-control" id="venueDate" type="text" name="date" value="">
             </div>
             <div class="form-group">
               <label for="address">Time</label>
-              <input class="form-control" type="text" name="time" value="">
+              <input class="form-control" id="venueTime" type="text" name="time" value="">
             </div>
           <input class="form-control" type="hidden" name="CategoryId" value="4">
       <button type="submit" class="btn btn-primary">Save Venue</button>
+      <div class="validateEvents"> </div>
       </form>
       </div>
       <div class="modal-footer">

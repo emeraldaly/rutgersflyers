@@ -529,7 +529,7 @@ app.get('/logout', function (req, res){
 app.post('/review/:venueId', function(req, res) {
   Review.create({
     review: req.body.review,
-    rating:req.body.rating,
+    rating:9,
     VenueId: req.params.venueId
   }).then(function() {
     res.redirect('back');
