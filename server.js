@@ -725,7 +725,7 @@ app.get('/food', function(req,res) {
   ]);
 
 
-  Events
+//  Events
   Review.bulkCreate([
       {review: 'Met so many great people.', rating: '5'},
       {review: 'Started on time, but not many people attended.', rating: '4'},
