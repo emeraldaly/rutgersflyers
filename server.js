@@ -568,12 +568,12 @@ app.get('/food', function(req,res) {
   });
 
   connection.sync();
-/*  Category.bulkCreate([
+  Category.bulkCreate([
       { category: 'Food' },
       { category: 'Transportation' },
       { category: 'Services'},
       { category: 'Events' }
-  ]);*/
+  ]);
  /* 
      Venue.bulkCreate([
      { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1 },
