@@ -1,14 +1,14 @@
 function validateEvents(){
   debugger;
 
-var venueName = $("#venueName").val();
-var venueAddress = $("#venueAddress").val();
-var venueAddress2 = $("#venueAddress2").val();
-var venuePhoneNumber = $("#venuePhoneNumber").val();
-var venueWebsite = $("#venueWebsite").val();
-var venueTime = $("#venueTime").val();
-var venueDate = $("#venueDate").val();
- if (venueName  == "" || venueAddress == "" || venueAddress2  == "" ||venuePhoneNumber  == "" ||venueWebsite  == "" ||venueTime == "" || venueDate == "" ){
+var eventsName = $("#eventsName").val();
+var eventsAddress = $("#eventsAddress").val();
+var eventsAddress2 = $("#eventsAddress2").val();
+var eventsPhoneNumber = $("#eventsPhoneNumber").val();
+var eventsWebsite = $("#eventsWebsite").val();
+var eventsTime = $("#eventsTime").val();
+var eventsDate = $("#eventsDate").val();
+ if (eventsName  == "" || eventsAddress == "" || eventsAddress2  == "" ||eventsPhoneNumber  == "" ||eventsWebsite  == "" ||eventsTime == "" || eventsDate == "" ){
 $(".validateEvents").html("Please enter all fields.")
 return false;
   }
@@ -17,12 +17,12 @@ return false;
 function validateTransportation(){
   debugger;
 
-var venueName = $("#venueName").val();
-var venueAddress = $("#venueAddress").val();
-var venueAddress2 = $("#venueAddress2").val();
-var venuePhoneNumber = $("#venuePhoneNumber").val();
-var venueWebsite = $("#venueWebsite").val();
- if (venueName  == "" || venueAddress == "" || venueAddress2  == "" ||venuePhoneNumber  == "" ||venueWebsite  == ""){
+var transportationName = $("#transportationName").val();
+var transportationAddress = $("#transportationAddress").val();
+var transportationAddress2 = $("#transportationAddress2").val();
+var transportationPhoneNumber = $("#transportationPhoneNumber").val();
+var transportationWebsite = $("#transportationWebsite").val();
+ if (transportationName  == "" || transportationAddress == "" || transportationAddress2  == "" ||transportationPhoneNumber  == "" ||transportationWebsite  == ""){
 $(".validateTransportation").html("Please enter all fields.")
 return false;
   }
@@ -32,12 +32,12 @@ return false;
 function validateFood(){
   debugger;
 
-var venueName = $("#venueName").val();
-var venueAddress = $("#venueAddress").val();
-var venueAddress2 = $("#venueAddress2").val();
-var venuePhoneNumber = $("#venuePhoneNumber").val();
-var venueWebsite = $("#venueWebsite").val();
- if (venueName  == "" || venueAddress == "" || venueAddress2  == "" ||venuePhoneNumber  == "" ||venueWebsite  == ""){
+var foodName = $("#foodName").val();
+var foodAddress = $("#foodAddress").val();
+var foodAddress2 = $("#foodAddress2").val();
+var foodPhoneNumber = $("#foodPhoneNumber").val();
+var foodWebsite = $("#foodWebsite").val();
+ if (foodName  == "" || foodAddress == "" || foodAddress2  == "" ||foodPhoneNumber  == "" ||foodWebsite  == ""){
 $(".validateFood").html("Please enter all fields.")
 return false;
   }
@@ -46,12 +46,12 @@ return false;
 function validateServices(){
   debugger;
 
-var venueName = $("#venueName").val();
-var venueAddress = $("#venueAddress").val();
-var venueAddress2 = $("#venueAddress2").val();
-var venuePhoneNumber = $("#venuePhoneNumber").val();
-var venueWebsite = $("#venueWebsite").val();
- if (venueName  == "" || venueAddress == "" || venueAddress2  == "" ||venuePhoneNumber  == "" ||venueWebsite  == ""){
+var servicesName = $("#servicesName").val();
+var servicesAddress = $("#servicesAddress").val();
+var servicesAddress2 = $("#servicesAddress2").val();
+var servicesPhoneNumber = $("#servicesPhoneNumber").val();
+var servicesWebsite = $("#servicesWebsite").val();
+ if (servicesName  == "" || servicesAddress == "" || servicesAddress2  == "" ||servicesPhoneNumber  == "" ||servicesWebsite  == ""){
 $(".validateServices").html("Please enter all fields.")
 return false;
   }
