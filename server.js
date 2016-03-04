@@ -369,6 +369,25 @@ Venue.findAll({
   });
 });
 
+// app.get('/avg', function(req,res){
+//  connection.query("SELECT VenueId, avg(rating) AS average FROM reviews group by VenueId LEFT JOIN venues ON reviews.VenueId=Venues.name", {model: Review}), 
+//   include: [
+//   {model:Venue}
+//   ].then(function(projects){
+  
+// console.log(projects[42].dataValues.average)
+//   });
+// });
+
+app.get('/food/:p', function(req,res) {
+  var x = req.params.p;
+  Venue.findAll({
+    where: {
+      "id" : x},
+      include: [
+      {model:Review}
+      ]
+
 app.post('/search', function(req,res) {
 var searchterm = "%" + req.body.search + "%";
 Venue.findAll({
@@ -379,6 +398,7 @@ Venue.findAll({
     include: [{
         model: Review,
     }]
+
   }).then(function(Venues) {
  res.render('search', {
       Venues: Venues
@@ -642,115 +662,115 @@ app.get('/food', function(req,res) {
 
 */
 
-     Review.bulkCreate([
- { review: 'Really the best restaurant place for those so inclined to such things.', rating: '5'},
- { review: 'So amazing! Can\'t wait to go back again. Definitely recommend', rating: '5'},
-  {review: 'Awful service. But the food is good.', rating: '3'},
-  {review: 'Such a great spot! Definitely a highlight in New Brunswick. This is going to be a regular place for me!', rating: '5'},
-  {review: 'Wish they had more selection. The ambience was meh. Good prices.', rating: '4'},
-  {review: 'Perfect if you\'re hungry. Bring your appetite!', rating: '5'},
-  {review: 'Hit the spot!', rating: '5'},
-  {review: 'Such great staff. They made us feel very welcome and gave us extra bread!', rating: '5'},
-  {review: 'Will never go back. We waited for over an hour to be seated. Our food was cold. And the waiter was very rude.', rating: '1'},
-  {review: 'A great find. The service, the food, and the location. It was a great meal and fast!', rating: '5'},
-  {review: 'Spicy, spicy, spicy. Yum :D', rating: '5'},
-  {review: 'A bit overpriced in my opinion.', rating: '3'},
-  {review: 'Difficult to find parking. But the food was good.', rating: '4'},
-  {review: 'Will definitely bring my friends here when they visit. Very good food.', rating: '5'},
-  {review: 'Great variety on the menu! A bit of a wait.', rating: '4'},
-  {review: 'Delicious. A bit loud which made catching up difficult.', rating: '4'},
-  {review: 'An outrage. How are they still in business? Will never go back here again.', rating: '1'},
-  {review: 'I loved the vibe. Great place.', rating: '5'},
-  {review: 'Scrumptious. Best meal I\'ve had all week.', rating: '5'},
-  {review: 'I expect a lot when I go out and this fit the bill. The price was right. The service was good but not in my face. And the menu had a good selection.', rating: '5'},
-  {review: 'This was a great place to relax and catch up with friends. I\'ll be back!', rating: '5'},
-  {review: 'I had a great time here. The food was simple with no fuss. It hit the spot.', rating: '5'},
-  {review: 'So glad this restaurant came to New Brunswick! Perect for my busy schedule.', rating: '5'},
-  {review: 'The restaurant was ok. Not too much flavor.', rating: '3'},
-  {review: 'Classic!', rating: '5'},
-  {review: 'Greasy food. Poor service.', rating: '2'},
-  {review: 'Splendid evening. Good eats.', rating: '4'},
-  {review: 'They had live music and the food was delicious!', rating: '5'},
-  {review: 'Wonderful spot to get work done and get something to eat', rating: '5'},
-  {review: 'This is one of my favorite spots in New Brunswick!', rating: '5'},
-  {review: 'I eat here almost every day. I wish they delivered', rating: '4'},
-  {review: 'This is really good value and food. Get there early as it gets crowded quickly!', rating: '4'},
-  {review: 'You need a reservation. Very popular location! Worth the wait.', rating: '5'},
-  {review: 'This is a great place to go to study for midterms. There is space to spread out your books. The coffee is good and affordable!', rating: '5'},
-  {review: 'They know me by name! Very personable staff.', rating: '5'},
-  {review: 'This is a must go to in New Brunswick. The food isn\'t the best, but it\'s a tradition!', rating: '5'},
-  {review: 'Great selection and flavor.', rating: '5'},
-  {review: 'This is the best spot to go! I highly recommend you try this restaurant. Scrumptiousdeliocious!', rating: '5'},
-  {review: 'If you\'re looking for a good meal that is affordable. This is a great spot!', rating: '5'},
-  {review: 'The bathrooms are gross. The service is not great. It is a fast place to get a meal, but definitely nothing special.', rating: '3'},
-  {review: 'Perfect spot for busy students. I eat here all the time. Good price. Good food. Good wifi.', rating: '5'},
-  {review: 'The food is good. The setting isn\'t anything special.', rating: '4'},
-  {review: 'Definitely worth checking this place out! The food was good. They split our bill amongst a big group.', rating: '5'},
-  {review: 'I proposed to my wife here. It is a special spot!', rating: '5'},
-  {review: 'Two thumbs up. Great menu and service. Clean and fun decor.', rating: '5'},
-  {review: 'Simple and fast.', rating: '4'},
-  {review: 'They have trivia nights every Thursday and karaoke on Mondays. Great spot to come with friends.', rating: '5'}, 
-  {review: 'I always come here after class. Great place to recharge.', rating: '5'},
-  {review: 'Love this place. Definitely recommend.', rating: '5'}
-  ]);
+ //     Review.bulkCreate([
+ // { review: 'Really the best restaurant place for those so inclined to such things.', rating: '5'},
+ // { review: 'So amazing! Can\'t wait to go back again. Definitely recommend', rating: '5'},
+ //  {review: 'Awful service. But the food is good.', rating: '3'},
+ //  {review: 'Such a great spot! Definitely a highlight in New Brunswick. This is going to be a regular place for me!', rating: '5'},
+ //  {review: 'Wish they had more selection. The ambience was meh. Good prices.', rating: '4'},
+ //  {review: 'Perfect if you\'re hungry. Bring your appetite!', rating: '5'},
+ //  {review: 'Hit the spot!', rating: '5'},
+ //  {review: 'Such great staff. They made us feel very welcome and gave us extra bread!', rating: '5'},
+ //  {review: 'Will never go back. We waited for over an hour to be seated. Our food was cold. And the waiter was very rude.', rating: '1'},
+ //  {review: 'A great find. The service, the food, and the location. It was a great meal and fast!', rating: '5'},
+ //  {review: 'Spicy, spicy, spicy. Yum :D', rating: '5'},
+ //  {review: 'A bit overpriced in my opinion.', rating: '3'},
+ //  {review: 'Difficult to find parking. But the food was good.', rating: '4'},
+ //  {review: 'Will definitely bring my friends here when they visit. Very good food.', rating: '5'},
+ //  {review: 'Great variety on the menu! A bit of a wait.', rating: '4'},
+ //  {review: 'Delicious. A bit loud which made catching up difficult.', rating: '4'},
+ //  {review: 'An outrage. How are they still in business? Will never go back here again.', rating: '1'},
+ //  {review: 'I loved the vibe. Great place.', rating: '5'},
+ //  {review: 'Scrumptious. Best meal I\'ve had all week.', rating: '5'},
+ //  {review: 'I expect a lot when I go out and this fit the bill. The price was right. The service was good but not in my face. And the menu had a good selection.', rating: '5'},
+ //  {review: 'This was a great place to relax and catch up with friends. I\'ll be back!', rating: '5'},
+ //  {review: 'I had a great time here. The food was simple with no fuss. It hit the spot.', rating: '5'},
+ //  {review: 'So glad this restaurant came to New Brunswick! Perect for my busy schedule.', rating: '5'},
+ //  {review: 'The restaurant was ok. Not too much flavor.', rating: '3'},
+ //  {review: 'Classic!', rating: '5'},
+ //  {review: 'Greasy food. Poor service.', rating: '2'},
+ //  {review: 'Splendid evening. Good eats.', rating: '4'},
+ //  {review: 'They had live music and the food was delicious!', rating: '5'},
+ //  {review: 'Wonderful spot to get work done and get something to eat', rating: '5'},
+ //  {review: 'This is one of my favorite spots in New Brunswick!', rating: '5'},
+ //  {review: 'I eat here almost every day. I wish they delivered', rating: '4'},
+ //  {review: 'This is really good value and food. Get there early as it gets crowded quickly!', rating: '4'},
+ //  {review: 'You need a reservation. Very popular location! Worth the wait.', rating: '5'},
+ //  {review: 'This is a great place to go to study for midterms. There is space to spread out your books. The coffee is good and affordable!', rating: '5'},
+ //  {review: 'They know me by name! Very personable staff.', rating: '5'},
+ //  {review: 'This is a must go to in New Brunswick. The food isn\'t the best, but it\'s a tradition!', rating: '5'},
+ //  {review: 'Great selection and flavor.', rating: '5'},
+ //  {review: 'This is the best spot to go! I highly recommend you try this restaurant. Scrumptiousdeliocious!', rating: '5'},
+ //  {review: 'If you\'re looking for a good meal that is affordable. This is a great spot!', rating: '5'},
+ //  {review: 'The bathrooms are gross. The service is not great. It is a fast place to get a meal, but definitely nothing special.', rating: '3'},
+ //  {review: 'Perfect spot for busy students. I eat here all the time. Good price. Good food. Good wifi.', rating: '5'},
+ //  {review: 'The food is good. The setting isn\'t anything special.', rating: '4'},
+ //  {review: 'Definitely worth checking this place out! The food was good. They split our bill amongst a big group.', rating: '5'},
+ //  {review: 'I proposed to my wife here. It is a special spot!', rating: '5'},
+ //  {review: 'Two thumbs up. Great menu and service. Clean and fun decor.', rating: '5'},
+ //  {review: 'Simple and fast.', rating: '4'},
+ //  {review: 'They have trivia nights every Thursday and karaoke on Mondays. Great spot to come with friends.', rating: '5'}, 
+ //  {review: 'I always come here after class. Great place to recharge.', rating: '5'},
+ //  {review: 'Love this place. Definitely recommend.', rating: '5'}
+ //  ]);
 
 
   //Services
-  Review.bulkCreate([
-      {review: 'Key Foods gives free rides home! And there is a 5% discount for Rutgers students.', rating: '5'},
-      {review: 'Key Foods has a great selection.', rating: '4'},
-      {review: 'Robert Wood Johnson Fitness /& Wellness Center has the absolute best trainers!', rating: '5'},
-      {review: 'Robert Wood Johnson Fitness /& Wellness Center motivates me to get in shape. I love starting my day at this gym.', rating: '5'},
-      {review: 'George Street Co-Op is a bit pricey, but it\'s worth it for the quality of the products. Also has fun events! A real community.', rating: '5'},
-      {review: 'George Street Co-Op is too expensive.', rating: '4'},
-      {review: 'New Brunswick Post Office has a convenient location and good hours.', rating: '5'},
-      {review: 'New Brunswick Post Office has good service.', rating: '5'},
-      {review: 'Saint Peter\'s University Hospital took care of my family!', rating: '5'},
-      {review: 'Saint Peter\'s University Hospital was comfortable and professional.', rating: '4'},
-      {review: 'Robert Wood Johnson University Hospital lived up to its reputation.', rating: '5'},
-      {review: 'Robert Wood Johnson University Hospital helped make a difficult situation more comfortable.', rating: '4'},
-      {review: 'Sparks Hair Design always gives me a great cut.', rating: '5'},
-      {review: 'Sparks Hair Design is my go to salon.', rating: '5'},
-      {review: 'State Theatre has so many great shows. We love bringing our family here.', rating: '5'},
-      {review: 'Going to the State Theatre is a great break from studying.', rating: '5'},
-      {review: 'The State Theatre brings in so many great shows. Wish there were more kid shows.', rating: '4'},
-      {review: 'State Theatre is a nice theatre!', rating: '5'},
-      {review: 'Moda Hair Salon knows how to style hair excellently.', rating: '5'},
-      {review: 'Moda Hair Salon has great customer service.', rating: '4'},
-      {review: 'This was my first time at Moda Hair Salon. I\'d come back!', rating: '4'},
-      {review: 'Saint Peter\'s University Hospital was very professional. Obviously most visits to the hospital are difficult.', rating: '3'},
-      {review: 'George Street Co-Op feels like a real community! Love the quality.', rating: '5'},
-      {review: 'Key Foods has everything I needed and they drove me home!', rating: '4'},
-      {review: 'Robert Wood Johnson Fitness \& Wellness Center helped me lose 30 lbs with the #2 requested trainer of the gym!', rating: '5'}
-  ]);
+  // Review.bulkCreate([
+  //     {review: 'Key Foods gives free rides home! And there is a 5% discount for Rutgers students.', rating: '5'},
+  //     {review: 'Key Foods has a great selection.', rating: '4'},
+  //     {review: 'Robert Wood Johnson Fitness /& Wellness Center has the absolute best trainers!', rating: '5'},
+  //     {review: 'Robert Wood Johnson Fitness /& Wellness Center motivates me to get in shape. I love starting my day at this gym.', rating: '5'},
+  //     {review: 'George Street Co-Op is a bit pricey, but it\'s worth it for the quality of the products. Also has fun events! A real community.', rating: '5'},
+  //     {review: 'George Street Co-Op is too expensive.', rating: '4'},
+  //     {review: 'New Brunswick Post Office has a convenient location and good hours.', rating: '5'},
+  //     {review: 'New Brunswick Post Office has good service.', rating: '5'},
+  //     {review: 'Saint Peter\'s University Hospital took care of my family!', rating: '5'},
+  //     {review: 'Saint Peter\'s University Hospital was comfortable and professional.', rating: '4'},
+  //     {review: 'Robert Wood Johnson University Hospital lived up to its reputation.', rating: '5'},
+  //     {review: 'Robert Wood Johnson University Hospital helped make a difficult situation more comfortable.', rating: '4'},
+  //     {review: 'Sparks Hair Design always gives me a great cut.', rating: '5'},
+  //     {review: 'Sparks Hair Design is my go to salon.', rating: '5'},
+  //     {review: 'State Theatre has so many great shows. We love bringing our family here.', rating: '5'},
+  //     {review: 'Going to the State Theatre is a great break from studying.', rating: '5'},
+  //     {review: 'The State Theatre brings in so many great shows. Wish there were more kid shows.', rating: '4'},
+  //     {review: 'State Theatre is a nice theatre!', rating: '5'},
+  //     {review: 'Moda Hair Salon knows how to style hair excellently.', rating: '5'},
+  //     {review: 'Moda Hair Salon has great customer service.', rating: '4'},
+  //     {review: 'This was my first time at Moda Hair Salon. I\'d come back!', rating: '4'},
+  //     {review: 'Saint Peter\'s University Hospital was very professional. Obviously most visits to the hospital are difficult.', rating: '3'},
+  //     {review: 'George Street Co-Op feels like a real community! Love the quality.', rating: '5'},
+  //     {review: 'Key Foods has everything I needed and they drove me home!', rating: '4'},
+  //     {review: 'Robert Wood Johnson Fitness \& Wellness Center helped me lose 30 lbs with the #2 requested trainer of the gym!', rating: '5'}
+  // ]);
 
 
 //  Events
-  Review.bulkCreate([
-      {review: 'Met so many great people.', rating: '5'},
-      {review: 'Started on time, but not many people attended.', rating: '4'},
-      {review: 'Looking forward to this event!', rating: '5'},
-      {review: 'Fun time!', rating: '4'},
-      {review: 'Fun event!', rating: '5'},
-      {review: 'Great performance!', rating: '5'},
-      {review: 'So fun to get out and relax here.', rating: '4'},
-      {review: 'A nice break from studying!', rating: '3'},
-      {review: 'NY is close, but New Brunswick has great events too!', rating: '5'},
-      {review: 'Had a nice time!', rating: '5'},
-      {review: 'Looking forward to coming back.', rating: '5'},
-      {review: 'I saw this last year. I\'d like something new!.', rating: '4'},
-      {review: 'Subpar.', rating: '3'},
-      {review: 'My view was blocked and the staff talked through the performance.', rating: '4'},
-      {review: 'Enjoyed my time here!.', rating: '4'},
-      {review: 'Looking forward to coming back. Always have a god time.', rating: '5'},
-      {review: 'Could use a bit of a pick-up in the decor.', rating: '4'},
-      {review: 'Superb time!!', rating: '5'},
-      {review: 'I\'d rather go to NY. Not much of a comparison.', rating: '3'},
-      {review: '5 stars!!', rating: '5'},
-      {review: 'There was no intermission and the tickets were steep!', rating: '3'},
-      {review: 'Lovely time.', rating: '5'},
-      {review: 'Great family event!', rating: '5'}
-  ]);
+  // Review.bulkCreate([
+  //     {review: 'Met so many great people.', rating: '5'},
+  //     {review: 'Started on time, but not many people attended.', rating: '4'},
+  //     {review: 'Looking forward to this event!', rating: '5'},
+  //     {review: 'Fun time!', rating: '4'},
+  //     {review: 'Fun event!', rating: '5'},
+  //     {review: 'Great performance!', rating: '5'},
+  //     {review: 'So fun to get out and relax here.', rating: '4'},
+  //     {review: 'A nice break from studying!', rating: '3'},
+  //     {review: 'NY is close, but New Brunswick has great events too!', rating: '5'},
+  //     {review: 'Had a nice time!', rating: '5'},
+  //     {review: 'Looking forward to coming back.', rating: '5'},
+  //     {review: 'I saw this last year. I\'d like something new!.', rating: '4'},
+  //     {review: 'Subpar.', rating: '3'},
+  //     {review: 'My view was blocked and the staff talked through the performance.', rating: '4'},
+  //     {review: 'Enjoyed my time here!.', rating: '4'},
+  //     {review: 'Looking forward to coming back. Always have a god time.', rating: '5'},
+  //     {review: 'Could use a bit of a pick-up in the decor.', rating: '4'},
+  //     {review: 'Superb time!!', rating: '5'},
+  //     {review: 'I\'d rather go to NY. Not much of a comparison.', rating: '3'},
+  //     {review: '5 stars!!', rating: '5'},
+  //     {review: 'There was no intermission and the tickets were steep!', rating: '3'},
+  //     {review: 'Lovely time.', rating: '5'},
+  //     {review: 'Great family event!', rating: '5'}
+  // ]);
   
 
     //database connection
