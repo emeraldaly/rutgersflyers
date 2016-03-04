@@ -554,6 +554,15 @@ app.get('/food', function(req,res) {
   });
 
 
+<<<<<<< HEAD
+app.post('/review/:venueId', function(req, res) {
+  Review.create({
+    review: req.body.review,
+    rating:9,
+    VenueId: req.params.venueId
+  }).then(function() {
+    res.redirect('back');
+=======
   app.post('/review/:venueId', function(req, res) {
     Review.create({
       review: req.body.review,
@@ -562,6 +571,7 @@ app.get('/food', function(req,res) {
     }).then(function() {
       res.redirect('back');
     });
+>>>>>>> b9050d208634632400e0c3a1b0ffbf8b87ee3771
   });
 
   connection.sync();
