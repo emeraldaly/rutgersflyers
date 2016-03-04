@@ -364,6 +364,16 @@ app.get('/food', function(req,res) {
   });
 });
 
+app.get('/avg', function(req,res){
+ connection.query("SELECT VenueId, avg(rating) AS average FROM reviews group by VenueId LEFT JOIN venues ON reviews.VenueId=Venues.name", {model: Review}), 
+  include: [
+  {model:Venue}
+  ].then(function(projects){
+  
+console.log(projects[42].dataValues.average)
+  });
+});
+
 app.get('/food/:p', function(req,res) {
   var x = req.params.p;
   Venue.findAll({
