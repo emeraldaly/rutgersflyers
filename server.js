@@ -355,7 +355,7 @@ Venue.findAll({
         model: Review,
     }]
   }).then(function(Venues) {
- res.render('search_a', {
+ res.render('searcha', {
    Venues: Venues, layout: "maina", user: usern
     })
   });
