@@ -8,7 +8,14 @@
       <div class="modal-body">
          <form action="/venuesCreate" method="POST" >
         {{> venuesQuestions}}
-        
+        <div class="form-group">
+              <label for="address">Date</label>
+              <input class="form-control" type="text" name="date" value="">
+            </div>
+            <div class="form-group">
+              <label for="address">Time</label>
+              <input class="form-control" type="text" name="time" value="">
+            </div>
           <input class="form-control" type="hidden" name="CategoryId" value="4">
       <button type="submit" class="btn btn-primary">Save Venue</button>
       </form>
