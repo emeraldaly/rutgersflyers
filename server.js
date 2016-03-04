@@ -574,7 +574,7 @@ app.get('/food', function(req,res) {
       { category: 'Services'},
       { category: 'Events' }
   ]);  */
-
+/*
      Venue.bulkCreate([
      { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1 },
      { name: 'RU Hungry', address: '159 College Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-2177', website: 'http://ruhungrynj.net/', CategoryId: 1 },
@@ -640,7 +640,7 @@ app.get('/food', function(req,res) {
      { name: 'Bobby Bandiera\'s Tribute to Bruce Springstein/, Bon Jovia/, Southside Johnny/, and Others', address: '15 Livingston Ave.', address2: 'New Brunswick\, NJ 08901', date: 'March 12, 2016', time: '8 pm', phoneNumber: '732-246-7469', website: 'http://www.statetheatrenj.org/', CategoryId: 4 } 
      ]);     
 
-/*
+*/
 
      Review.bulkCreate([
  { review: 'Really the best restaurant place for those so inclined to such things.', rating: '5'},
@@ -752,7 +752,7 @@ app.get('/food', function(req,res) {
       {review: 'Great family event!', rating: '5'}
   ]);
   
-*/
+
     //database connection
     app.listen(PORT, function() {
       console.log("Listening on:" + PORT)
