@@ -243,7 +243,11 @@ app.get("/auth", function(req, res){
   })
 })
 
-
+app.get("/test", function(req,res) {
+Review.avg({ where: ["rating > ?", 0] }).then(function(c) {
+  console.log("There are " + c + " reviews with a rating greater than 3.")
+})
+});
 
 app.get("/events", function(req, res) {
   Venue.findAll({
