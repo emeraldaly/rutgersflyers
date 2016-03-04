@@ -557,7 +557,7 @@ app.get('/food', function(req,res) {
   });
 
 
-  app.post('/review/:venueId', function(req, res) {
+  app.post('/review/:venueId', isAuth, function(req, res) {
     Review.create({
       review: req.body.review,
       rating:req.body.rating,
