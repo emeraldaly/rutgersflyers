@@ -244,9 +244,13 @@ app.get("/auth", function(req, res){
 })
 
 app.get("/test", function(req,res) {
-Review.avg({ where: ["rating > ?", 0] }).then(function(c) {
-  console.log("There are " + c + " reviews with a rating greater than 3.")
-})
+Review.findAll({
+attributes: ['rating', [connection.fn('count', connection.col('review.id')), 'count']]})
+  .then(function(Venues) {
+ console.log(Venues);
+
+  //   res.render("events", {Venues: Venues})
+  });
 });
 
 app.get("/events", function(req, res) {
@@ -405,11 +409,6 @@ app.get('/food', function(req,res) {
         {model:Review}
         ]
     }).then(function(Venues) {
-      var vname = Venues.name;
-      console.log(vname);
-      var quotedvname = '"' + vname + '"';
-      var yname = yelpFunc(quotedvname, "New Brunswick");
-      console.log(Venues);
       res.render('foodDetail', {
         Venues: Venues
       })
