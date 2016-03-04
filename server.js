@@ -351,7 +351,7 @@ app.get('/events_a', isAuth, function(req,res) {
 
 app.post('/search_a', function(req,res) {
   var searchterma = '"%' + req.body.search + '%"';
-  connection.query('SELECT * FROM venues where name like' +  searchterma, { model: Venue }).then(function(Venues){
+  connection.query('SELECT * FROM Venues where name like' +  searchterma, { model: Venue }).then(function(Venues){
     res.render('searcha', {
       Venues: Venues, layout: "maina.handlebars", user: usern
 
@@ -561,7 +561,7 @@ app.post('/search', function(req,res) {
       { category: 'Services'},
       { category: 'Events' }
   ]);*/
-  
+ /* 
      Venue.bulkCreate([
      { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1 },
      { name: 'RU Hungry', address: '159 College Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-2177', website: 'http://ruhungrynj.net/', CategoryId: 1 },
@@ -739,7 +739,7 @@ app.post('/search', function(req,res) {
       {review: 'Great family event!', rating: '5', VenueId: 561}
   ]);
   
-
+*/
     //database connection
     app.listen(PORT, function() {
       console.log("Listening on:" + PORT)
