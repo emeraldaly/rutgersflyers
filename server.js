@@ -566,7 +566,7 @@ app.get('/food', function(req,res) {
       res.redirect('back');
     });
   });
-/*
+
   connection.sync();
   Category.bulkCreate([
       { category: 'Food' },
@@ -574,7 +574,7 @@ app.get('/food', function(req,res) {
       { category: 'Services'},
       { category: 'Events' }
   ]);
-  
+/*  
      Venue.bulkCreate([
      { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1 },
      { name: 'RU Hungry', address: '159 College Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-2177', website: 'http://ruhungrynj.net/', CategoryId: 1 },
