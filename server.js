@@ -574,7 +574,7 @@ app.get('/food', function(req,res) {
       { category: 'Services'},
       { category: 'Events' }
   ]);
- /* 
+  
      Venue.bulkCreate([
      { name: 'The Frog and the Peach', address: '29 Dennis St', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-846-3216', website: 'frogandpeach.com', CategoryId: 1 },
      { name: 'RU Hungry', address: '159 College Ave.', address2: 'New Brunswick\, NJ 08901', phoneNumber: '732-246-2177', website: 'http://ruhungrynj.net/', CategoryId: 1 },
@@ -641,7 +641,7 @@ app.get('/food', function(req,res) {
      ]);     
 
 
-
+/*
      Review.bulkCreate([
      { review: 'Really the best restaurant place for those so inclined to such things.', rating: '5', VenueId: 500 },
      { review: 'So amazing! Can\'t wait to go back again. Definitely recommend', rating: '5', VenueId: 501 },
