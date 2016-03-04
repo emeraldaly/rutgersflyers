@@ -350,18 +350,22 @@ app.get('/events_a', isAuth, function(req,res) {
 });
 
 app.post('/search_a', function(req,res) {
-  var searchterma = '"%' + req.body.search + '%"';
-  connection.query('SELECT * FROM Venues where name like' +  searchterma, { model: Venue }, {tableName: 'Venue'
-}
-      ).then(function(Venues){
-    res.render('searcha', {
-      Venues: Venues, layout: "maina.handlebars", user: usern
-
+var searchterm = "%" + req.body.search + "%";
+Venue.findAll({
+  where: {
+    name:{
+      $like: searchterm},
+  },
+    include: [{
+        model: Review,
+    }]
+  }).then(function(Venues) {
+ res.render('searcha', {
+   Venues: Venues, layout: "maina", user: usern
     })
   });
 });
 
-   
 app.post('/search', function(req,res) {
 var searchterm = "%" + req.body.search + "%";
 Venue.findAll({
