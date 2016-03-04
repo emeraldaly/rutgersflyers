@@ -15,10 +15,10 @@
                <p>{{this.review}}
                <p>Rating: {{this.rating}}
                {{/each}}
-               <form class="reviewForm"method="POST" action="/review/{{ id }}">
+                <form class="reviewForm"method="POST" onsubmit="return validateReview()"action="/review/{{ id }}">
                <h4>Review: </h4>
-               <textarea rows="4" cols="50" type="text" class="form-control"
-                 name="review"> </textarea>
+              <textarea id="review" rows="4" cols="50" type="text" class="form-control"
+               name="review"> </textarea>
               <h4>Rating: </h4>
               <div class="form-group">
             <label class="checkbox-inline"><input type="radio" name="rating" value="1"> 1</label>
@@ -30,6 +30,7 @@
             </div>
    
               <button type="submit" class="btn btn-default dataButton">Submit</button>
+              <div class="validateReview"> </div>
             </form>
             <button class="createReview btn btn-default">write a review </button>
        {{/each}}     
@@ -38,12 +39,6 @@
         </div>
       </div> 
     </div>
-
-
-
-
-
-
 </div>
 </div>
 </div>

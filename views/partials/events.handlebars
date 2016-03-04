@@ -6,18 +6,38 @@
         <h4 class="modal-title">Events</h4>
       </div>
       <div class="modal-body">
-         <form action="/venuesCreate" method="POST" >
-        {{> venuesQuestions}}
+         <form action="/venuesCreate" method="POST" onsubmit="return validateEvents()" >
+         <div class="form-group">
+              <label for="name">Name</label>
+              <input id="eventsName"class="form-control" type="text" name="name" value=""> 
+            </div>
+            <div class="form-group">
+              <label for="address">Street Address</label>
+              <input id="eventsAddress" class="form-control" type="text" name="address" value="">
+            </div>
+               <div class="form-group">
+              <label for="address">City, State, Zip</label>
+              <input id="eventsAddress2" class="form-control" type="text" name="address2" value="">
+            </div>
+              <div class="form-group">
+              <label for="phoneNumber">Phone Number</label>
+              <input id="eventsPhoneNumber" class="form-control" type="text" name="phoneNumber" value="">
+            </div>
+              <div class="form-group">
+              <label for="website">Website</label>
+              <input id="eventsWebsite"class="form-control" type="text" name="website" value="">
+            </div>
         <div class="form-group">
               <label for="address">Date</label>
-              <input class="form-control" type="text" name="date" value="">
+              <input class="form-control" id="venueDate" type="text" name="date" value="">
             </div>
             <div class="form-group">
               <label for="address">Time</label>
-              <input class="form-control" type="text" name="time" value="">
+              <input class="form-control" id="venueTime" type="text" name="time" value="">
             </div>
           <input class="form-control" type="hidden" name="CategoryId" value="4">
       <button type="submit" class="btn btn-primary">Save Venue</button>
+      <div class="validateEvents"> </div>
       </form>
       </div>
       <div class="modal-footer">
