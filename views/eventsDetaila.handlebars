@@ -1,19 +1,18 @@
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-      </div>
-      <div class="venuename col-md-6">
-        <br>
+  <div class="container-fluid ">
+    <div class="row-fluid">
+      <div class="venuename col-md-6 col-md-offset-3">
         {{#each Venues}}
-        <h2 class="detitle">{{name}}</h2>
-               <p>{{this.address}} </p>
-               <p>{{this.phoneNumber}}</p>
-               <p>{{this.website}}</p>
-          
+        <div class="text-center">
+          <h2 class="detitle">{{name}}</h2>
+            <p>{{this.address}} </p>
+            <p>{{this.phoneNumber}}</p>
+            <p>{{this.website}}</p>
+          </div>
                {{#each Reviews}}
-               <p>{{this.review}}
-               <p>Rating: {{this.rating}}
+               <div class ="reviewDiv">
+               <p>{{this.review}} </p>
+                <p class="rating text-right">Rating: {{this.rating}} </p>
+          </div>
                {{/each}}
                 <form class="reviewForm"method="POST" onsubmit="return validateReview()"action="/review/{{ id }}">
                <h4>Review: </h4>
@@ -42,4 +41,4 @@
 </div>
 </div>
 </div>
-</body>
+
