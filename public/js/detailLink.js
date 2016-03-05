@@ -1,5 +1,4 @@
 function validateEvents(){
-  debugger;
 
 var eventsName = $("#eventsName").val();
 var eventsAddress = $("#eventsAddress").val();
@@ -15,7 +14,6 @@ return false;
 }
 
 function validateTransportation(){
-  debugger;
 
 var transportationName = $("#transportationName").val();
 var transportationAddress = $("#transportationAddress").val();
@@ -30,7 +28,6 @@ return false;
 
 
 function validateFood(){
-  debugger;
 
 var foodName = $("#foodName").val();
 var foodAddress = $("#foodAddress").val();
@@ -44,7 +41,6 @@ return false;
 }
 
 function validateServices(){
-  debugger;
 
 var servicesName = $("#servicesName").val();
 var servicesAddress = $("#servicesAddress").val();
@@ -58,7 +54,7 @@ return false;
 }
 
   function validateReview(){
-    debugger;
+
     var rating = $ ('input[name=rating]:checked').val();
     var review = $("#review").val();
      if (rating  == undefined || review == "" ){
@@ -69,7 +65,7 @@ return false;
     
 
   function validateRegister() {
-    debugger;
+
   var registerUsername  = $("#registerUsername ").val();
   var registerFirstname  = $("#registerFirstname").val();
   var registerLastname  = $("#registerLastname").val();
