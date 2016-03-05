@@ -219,7 +219,8 @@ app.get("/", function(req, res){
     order: [
       //     // Will escape username and validate DESC against a list of valid direction parameters
       ['createdAt', 'DESC']
-    ]
+    ],
+    limit: 25
   }).then(function(Reviews) {
     res.render('sortByNewest', {msg: req.query.msg,
       Reviews : Reviews
@@ -243,17 +244,36 @@ app.get("/auth", function(req, res){
   })
 })
 
-app.get("/test", function(req,res) {
-  Review.findAll({
-order: [[Sequelize.fn('max', Sequelize.col('rating'))]]
-  }).then(function(Venues) {
-    debugger;
- console.log(Venues);
+app.get('/test', function(req,res){
+Review.findAll({
+   attributes: ['VenueId', [Sequelize.fn('AVG', Sequelize.col('rating')), 'averages']],
+//   include: [
+ //  {
+ //    model: Venue,
+//    attributes: ['name']
+//   }
+//   ],
+ group: ['VenueId']
+    }).then(function(projects){
+  debugger
+  console.log(projects);
+res.render("test", {projects: projects});
+
+})
+})
+
+
+//app.get("/test", function(req,res) {
+//  Review.findAll({
+//order: [[Sequelize.fn('max', Sequelize.col('rating'))]]
+//  }).then(function(Venues) {
+//    debugger;
+// :console.log(Venues);
 
   //   res.render("events", {Venues: Venues})
 
-});
-});
+//});
+//});
 
 app.get("/events", function(req, res) {
   Venue.findAll({
